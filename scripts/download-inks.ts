@@ -35,6 +35,8 @@ const main = async () => {
     .flat()
   const m = inkMetadata
 
+  console.log(`Generating ${m.length} images`)
+
   for (let i = 0; i < m.length; i++) {
     const inkTraits = m[i].map((trait) => t[trait])
 
@@ -43,13 +45,12 @@ const main = async () => {
     // remove the first id, which is the background
     ids.shift()
 
-    console.log(`Generating ${i + 1}.webp`)
-    console.log(`Number of layers: ${ids.length}`)
-
     const filename = i + 1 + '.webp'
 
     await generateWebp(ids, filename)
   }
+
+  console.log('Done')
 }
 
 main()
