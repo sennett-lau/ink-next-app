@@ -1,4 +1,4 @@
-const traits = [
+export const traits = [
   ['animal_background', [['animal_background', '7272441e884312237315d370914a35c4d4123974a82cf39ac08a87f0d4b03c77i14']]],
   [
     'animal_base',
@@ -1309,7 +1309,7 @@ const traits = [
   ],
 ]
 
-const inkMetadata = [
+export const inkMetadata = [
   [72, 78, 765, 175, 482, 582, 91, 161],
   [72, 74, 761, 177, 475, 585, 137, 162],
   [72, 544, 180, 100, 436, 582, 161],
