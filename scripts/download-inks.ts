@@ -5,6 +5,8 @@ import { inkMetadata, traits } from './data'
 const ORD_URL = 'https://ord-mirror.magiceden.dev/content'
 const PATH = 'inks'
 
+const traitsBufferMap = new Map<string, Buffer>()
+
 const fetchImage = async (url: string): Promise<Buffer> => {
   const response = await axios.get(url, { responseType: 'arraybuffer' })
   return Buffer.from(response.data)
@@ -12,7 +14,7 @@ const fetchImage = async (url: string): Promise<Buffer> => {
 
 const generateWebp = async (ids: string[], filename: string): Promise<void> => {
   try {
-    const imageBuffers = await Promise.all(ids.map((id) => fetchImage(`${ORD_URL}/${id}`)))
+    const imageBuffers = ids.map((id) => traitsBufferMap.get(id))
 
     let overlay = sharp(imageBuffers[0], { pages: -1 })
 
@@ -29,10 +31,25 @@ const generateWebp = async (ids: string[], filename: string): Promise<void> => {
   }
 }
 
+const loadTraits = async (ids: string[]) => {
+  console.log(`Loading ${ids.length} traits`)
+  const traits = await Promise.all(ids.map((id) => fetchImage(`${ORD_URL}/${id}`)))
+  console.log('Traits loaded')
+
+  for (let i = 0; i < ids.length; i++) {
+    traitsBufferMap.set(ids[i], traits[i])
+  }
+}
+
 const main = async () => {
   const t = traits
     .map(([trait_type, ts]) => (ts as string[][]).map(([value, id]) => ({ trait_type, value, id })))
     .flat()
+
+  const traitIds = t.map((trait) => trait.id)
+
+  await loadTraits(traitIds)
+
   const m = inkMetadata
 
   console.log(`Generating ${m.length} images`)
