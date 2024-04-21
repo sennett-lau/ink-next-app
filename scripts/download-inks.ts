@@ -54,6 +54,8 @@ const main = async () => {
 
   console.log(`Generating ${m.length} images`)
 
+  const ps: Promise<void>[] = []
+
   for (let i = 0; i < m.length; i++) {
     const inkTraits = m[i].map((trait) => t[trait])
 
@@ -64,8 +66,10 @@ const main = async () => {
 
     const filename = i + 1 + '.webp'
 
-    await generateWebp(ids, filename)
+    ps.push(generateWebp(ids, filename))
   }
+
+  await Promise.all(ps)
 
   console.log('Done')
 }
