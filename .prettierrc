@@ -6,5 +6,9 @@
   "printWidth": 120,
   "tabWidth": 2,
   "bracketSpacing": true,
-  "organizeImportsSkipDestructiveCodeActions": true
+  "jsxSingleQuote": true,
+  "jsxBracketSameLine": false,
+  "useTabs": false,
+  "organizeImportsSkipDestructiveCodeActions": true,
+  "arrowParens": "always"
 }

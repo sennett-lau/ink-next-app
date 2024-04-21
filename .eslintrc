@@ -3,17 +3,19 @@
   "env": {
     "es6": true,
     "node": true,
-    "commonjs": true
+    "commonjs": true,
   },
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
   },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
   ],
   "rules": {
     "quotes": ["error", "single", { "avoidEscape": true }],
@@ -22,6 +24,6 @@
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "eqeqeq": "error"
-  }
+    "eqeqeq": "error",
+  },
 }
