@@ -8,8 +8,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Banner Creator | Ink',
-  description: 'Ink, an inscription project on BTC, for the community, by the community - INK Is For The People.',
+  title: 'INKhronizer - Banner Creator | Ink',
+  description: 'Ink, INKhronizer, the custom banner builder of Ink - an inscription project on BTC, for the community, by the community - INK Is For The People.',
   applicationName: 'Ink Community Website',
   authors: [{ name: 'Ink' }, { name: 'Sennett Lau (Capyyy)', url: 'https://sennettlau.me' }],
   generator: 'Next.js',
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   icons: [`${SITE_URL}/logo-pack/logo_128.png`],
   openGraph: {
-    title: 'Banner Creator | Ink',
-    description: 'Ink, an inscription project on BTC, for the community, by the community - INK Is For The People.',
+    title: 'INKhronizer - Banner Creator | Ink',
+    description: 'INKhronizer, the custom banner builder of Ink - an inscription project on BTC, for the community, by the community - INK Is For The People.',
     images: [
       {
         url: `${SITE_URL}/banner.png`,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: 'Banner Creator | Ink',
+    title: 'INKhronizer, the custom banner builder of Ink - an inscription project on BTC, for the community, by the community - INK Is For The People.',
     images: {
       url: `${SITE_URL}/banner.png`,
       alt: 'Ink',
