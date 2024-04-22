@@ -35,9 +35,9 @@ export default function Home() {
         <div className='flex w-2/3 justify-center items-center flex-col gap-8'>
           <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} containerRef={containerRef} />
           <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
-            <button className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'>
+            {/* <button className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'>
               Share Via X
-            </button>
+            </button> */}
             <button
               className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'
               onClick={downloadImage}
