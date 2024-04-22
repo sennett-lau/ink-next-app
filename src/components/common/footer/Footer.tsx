@@ -1,14 +1,16 @@
 import Image from 'next/image'
+import { VERSION } from '../../../config/general'
 
 const Footer = () => {
   return (
     <footer className='w-full fixed bottom-0'>
       <div className='w-full max-w-[1440px] mx-auto flex justify-between px-6 py-4'>
         <p className='text-black italic font-bold text-lg'>
-          By{' '}
+          By&nbsp;
           <a href='https://x.com/sennettlau_13' target='_blank'>
             Sennett Lau
           </a>
+          &nbsp;| <span className='text-primary-500'>INKhonizer v{VERSION}</span>
         </p>
         <div className='flex gap-4'>
           <p className='text-black italic font-bold text-lg'>Join INK:</p>
