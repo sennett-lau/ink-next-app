@@ -8,7 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        'header-bg': "url('/web/header-bg.png')",
+        'dotted': "url('/web/dotted.png')",
+      },
       colors: {
         primary: {
           500: '#FD8603', // logo orange
