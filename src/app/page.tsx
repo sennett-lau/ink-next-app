@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <p className='text-black italic font-bold text-lg mt-4 w-full text-left'>Choose a banner Background:</p>
             <div className='flex flex-col gap-2'>
-              <div className='flex flex-col gap-2 min-h-[368px]'>
+              <div className='flex flex-col gap-2 min-h-[376px]'>
                 {banners.slice((bannerPage - 1) * 3, bannerPage * 3).map((banner, index) => (
                   <div className='w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
                     <a
