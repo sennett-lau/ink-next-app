@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 type Props = {
   banner: string
   ink: string
+  canvasRef: React.RefObject<HTMLCanvasElement>
+  containerRef: React.RefObject<HTMLDivElement>
 }
 
 const InkCanvas = (props: Props) => {
-  const { banner, ink } = props
+  const { banner, ink, canvasRef, containerRef } = props
 
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState<number>(0)
 
   useEffect(() => {
@@ -58,17 +58,6 @@ const InkCanvas = (props: Props) => {
           ctx.drawImage(inkImage, canvas.width - canvas.height - canvas.width / 10, 0, canvas.height, canvas.height)
         }
       }
-    }
-  }
-
-  const downloadImage = () => {
-    const canvas = canvasRef.current
-    if (canvas) {
-      const image = canvas.toDataURL('image/png')
-      const link = document.createElement('a')
-      link.href = image
-      link.download = 'combined-image.png'
-      link.click()
     }
   }
 
