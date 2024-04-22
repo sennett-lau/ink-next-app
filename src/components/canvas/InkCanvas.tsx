@@ -11,6 +11,10 @@ type Props = {
 const InkCanvas = (props: Props) => {
   const { banner, ink, canvasRef, containerRef } = props
 
+  const inkRef = useRef<HTMLImageElement>(null)
+
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+
   const [containerWidth, setContainerWidth] = useState<number>(0)
   const [inkXPosition, setInkXPosition] = useState<number>(0)
 
@@ -55,6 +59,8 @@ const InkCanvas = (props: Props) => {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height)
 
+          setIsLoaded(true)
+
           inkImage.src = `/assets/inks/${ink}.webp`
 
           inkImage.onload = () => {
@@ -65,22 +71,42 @@ const InkCanvas = (props: Props) => {
     }
   }
 
+  const handleInkXPositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInkXPosition(parseInt(e.target.value))
+
+    // update imageRef position
+    if (inkRef.current) {
+      inkRef.current.style.transform = `translateX(${inkXPosition}px)`
+    }
+  }
+
   return (
     <div className={`w-full max-w-[800px]`}>
       <div
         ref={containerRef}
-        className={`w-full`}
-        style={{ backgroundImage: `url(/assets/banner-backgrounds/${banner}.webp)`, backgroundSize: 'contain' }}
+        className={`w-full relative ${isLoaded ? '' : 'h-[266px]'}`}
+        style={{
+          backgroundImage: isLoaded ? `url(/assets/banner-backgrounds/${banner}.webp)` : '',
+          backgroundSize: 'contain',
+        }}
       >
-        <canvas ref={canvasRef} className='border'></canvas>
+        <canvas ref={canvasRef} className='opacity-0'></canvas>
+        <img
+          ref={inkRef}
+          src={`/assets/inks/${ink}.webp`}
+          alt={ink}
+          width={containerWidth / 3}
+          height={containerWidth / 3}
+          className={`absolute bottom-0 left-0`}
+        />
       </div>
       <input
         type='range'
         min='0'
         max={containerWidth - containerWidth / 3} // Update max based on current canvas dimensions
         value={inkXPosition}
-        onChange={(e) => setInkXPosition(parseInt(e.target.value))}
-        className='w-full accent-black'
+        onChange={handleInkXPositionChange}
+        className='w-full accent-primary-500'
       />
     </div>
   )
