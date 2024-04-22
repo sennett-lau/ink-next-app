@@ -45,17 +45,18 @@ const InkCanvas = (props: Props) => {
         const inkImage = new Image()
 
         baseImage.src = `/assets/banner-backgrounds/${banner}.webp`
-        inkImage.src = `/assets/inks/${ink}.webp`
 
         console.log(`Using banner: ${baseImage.src} and ink: ${inkImage.src}`)
 
         baseImage.onload = () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height)
-        }
 
-        inkImage.onload = () => {
-          ctx.drawImage(inkImage, canvas.width - canvas.height - canvas.width / 10, 0, canvas.height, canvas.height)
+          inkImage.src = `/assets/inks/${ink}.webp`
+
+          inkImage.onload = () => {
+            ctx.drawImage(inkImage, canvas.width - canvas.height - canvas.width / 10, 0, canvas.height, canvas.height)
+          }
         }
       }
     }
