@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div className='w-full flex-1 flex justify-center items-center'>
-      <div className='w-full flex-1 max-w-[1440px] mx-auto px-6 py-8'>
+      <div className='w-full flex flex-1 max-w-[1440px] mx-auto px-6 py-8'>
         <div className='flex w-2/3 justify-center items-center flex-col gap-8'>
           <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} containerRef={containerRef} />
           <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
@@ -39,7 +39,18 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className='w-1/3'></div>
+        <div className='w-1/3 px-8'>
+          <div className='flex flex-col w-full rounded-2xl bg-white bg-opacity-50 px-4 py-8 shadow-xl min-h-[400px] items-center'>
+            <div className='flex gap-2'>
+              <label className='text-black italic font-bold pointer' htmlFor='ink-id'>
+                INK #: 
+              </label>
+              <input 
+                className='bg-transparent border-b-2 border-black text-black font-bold italic pl-2 focus:outline-none'
+              type="text" id='ink-id' value={inkId} onChange={(e) => setInkId(e.target.value)} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
