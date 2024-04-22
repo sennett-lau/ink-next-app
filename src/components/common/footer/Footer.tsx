@@ -8,9 +8,7 @@ const Footer = () => {
           By <a href='https://x.com/sennettlau_13'>Sennett Lau</a>
         </p>
         <div className='flex gap-4'>
-          <p className='text-black italic font-bold text-lg'>
-            Join INK:
-          </p>
+          <p className='text-black italic font-bold text-lg'>Join INK:</p>
           <a href='https://x.com/inkonbtc'>
             <Image src='/icons/x.svg' alt='x' width={24} height={24} />
           </a>
