@@ -13,7 +13,7 @@ export default function Home() {
   const [inkId, setInkId] = useState<string>('1')
 
   const [bannerPage, setBannerPage] = useState<number>(1)
-  const [bannerTotalPages, setBannerTotalPages] = useState<number>(bannerConfig.length / 3)
+  const [bannerTotalPages, setBannerTotalPages] = useState<number>(Math.ceil(bannerConfig.length / 3))
 
   const banners = bannerConfig
 
