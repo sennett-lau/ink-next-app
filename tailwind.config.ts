@@ -8,31 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        index: 'url(/assets/index-background.png)',
-        dan: 'url(/assets/pfps/dan-bg.jpg)',
-      },
+      backgroundImage: {},
       colors: {
         primary: {
-          400: '#D86A6A', // hover red
-          500: '#EE2737', // logo red
-          600: '#CB303D', // float item red
-          700: '#C13541', // title red
+          500: '#FD8603', // logo orange
         },
-        secondary: {
-          400: '#BC9496', // light content
-          500: '#6E4648', // text
-        },
-        light: {
-          400: '#FFDFCA', // card
-          500: '#FDD5BD', // background
-        },
+        secondary: {},
         dark: {
           500: '#121212', // background
         },
         discord: {
           500: '#7289DA', // discord color
-        }
+        },
       },
       maxWidth: {
         '8xl': '88rem',
