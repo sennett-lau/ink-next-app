@@ -84,7 +84,7 @@ const InkCanvas = (props: Props) => {
     <div className={`w-full max-w-[800px]`}>
       <div
         ref={containerRef}
-        className={`w-full relative ${isLoaded ? '' : 'h-[266px]'}`}
+        className={`w-full relative mb-4 ${isLoaded ? '' : 'h-[266px]'}`}
         style={{
           backgroundImage: isLoaded ? `url(/assets/banner-backgrounds/${banner}.webp)` : '',
           backgroundSize: 'contain',
