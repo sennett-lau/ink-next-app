@@ -4,6 +4,10 @@ export const bannerConfig = [
     by: 'inkonbtc',
   },
   {
+    name: 'runic_001',
+    by: 'sennettlau_13',
+  },
+  {
     name: 'hoponopono_002',
     by: 'hoponopono88',
   },
