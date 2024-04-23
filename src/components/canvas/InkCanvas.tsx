@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import SliderControl from './SliderControl'
 
 type Props = {
   banner: string
@@ -100,13 +101,11 @@ const InkCanvas = (props: Props) => {
           className={`absolute bottom-0 left-0`}
         />
       </div>
-      <input
-        type='range'
-        min='0'
-        max={containerWidth - containerWidth / 3} // Update max based on current canvas dimensions
+      <SliderControl
+        label='Ink Position'
+        max={containerWidth - containerWidth / 3}
         value={inkXPosition}
         onChange={handleInkXPositionChange}
-        className='w-full accent-primary-500'
       />
     </div>
   )
