@@ -13,11 +13,13 @@ const InkCanvas = (props: Props) => {
   const { banner, ink, canvasRef, containerRef } = props
 
   const inkRef = useRef<HTMLImageElement>(null)
+  const blackLayerRef = useRef<HTMLDivElement>(null)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const [containerWidth, setContainerWidth] = useState<number>(0)
   const [inkXPosition, setInkXPosition] = useState<number>(0)
+  const [blackLayerOpacity, setBlackLayerOpacity] = useState<number>(50)
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,6 +74,14 @@ const InkCanvas = (props: Props) => {
     }
   }
 
+  const handleBackgroundBlackLayerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBlackLayerOpacity(parseInt(e.target.value))
+
+    if (blackLayerRef.current) {
+      blackLayerRef.current.style.opacity = `${blackLayerOpacity / 100}`
+    }
+  }
+
   const handleInkXPositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInkXPosition(parseInt(e.target.value))
 
@@ -92,13 +102,14 @@ const InkCanvas = (props: Props) => {
         }}
       >
         <canvas ref={canvasRef} className='opacity-0'></canvas>
+        <div ref={blackLayerRef} className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50' />
         <img
           ref={inkRef}
           src={`/assets/inks/${ink}.webp`}
           alt={ink}
           width={containerWidth / 3}
           height={containerWidth / 3}
-          className={`absolute bottom-0 left-0`}
+          className={`absolute bottom-0 left-0 z-20`}
         />
       </div>
       <SliderControl
@@ -106,6 +117,12 @@ const InkCanvas = (props: Props) => {
         max={containerWidth - containerWidth / 3}
         value={inkXPosition}
         onChange={handleInkXPositionChange}
+      />
+      <SliderControl
+        label='Black Layer Opacity'
+        max={100}
+        value={blackLayerOpacity}
+        onChange={handleBackgroundBlackLayerChange}
       />
     </div>
   )
