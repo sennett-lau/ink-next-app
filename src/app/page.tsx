@@ -46,7 +46,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className='w-1/3 px-8'>
+        <div className='w-1/3 pl-2 pr-0 xl:px-8'>
           <div className='flex flex-col w-full rounded-2xl bg-white bg-opacity-50 px-4 py-4 shadow-xl min-h-[400px]'>
             <div className='flex gap-2'>
               <label className='text-black italic font-bold pointer' htmlFor='ink-id'>
@@ -64,7 +64,7 @@ export default function Home() {
             <div className='flex flex-col gap-2'>
               <div className='flex flex-col gap-2 min-h-[376px]'>
                 {banners.slice((bannerPage - 1) * 3, bannerPage * 3).map((banner, index) => (
-                  <div className='w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
+                  <div className='max-w-full w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
                     <a
                       className='italic text-black text-md bg-white bg-opacity-75 rounded-br-lg p-2 absolute top-0 left-0'
                       href={`https://x.com/${banner.by}`}
@@ -72,7 +72,7 @@ export default function Home() {
                       @{banner.by}
                     </a>
                     <Image
-                      className={`cursor-pointer ${bannerBackground === banner.name ? 'border-2 border-primary-500' : ''}`}
+                      className={`cursor-pointer ${bannerBackground === banner.name ? 'max-w-full border-2 border-primary-500' : ''}`}
                       key={index}
                       src={`/assets/banner-backgrounds/${banner.name}.webp`}
                       alt={banner.name}
