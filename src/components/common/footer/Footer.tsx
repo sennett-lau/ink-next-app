@@ -3,7 +3,7 @@ import { VERSION } from '../../../config/general'
 
 const Footer = () => {
   return (
-    <footer className='w-full fixed bottom-0'>
+    <footer className='w-full lg:fixed bottom-0 bg-white lg:bg-transparent'>
       <div className='w-full max-w-[1440px] mx-auto flex justify-between px-6 py-4'>
         <p className='text-black italic font-bold text-lg'>
           By&nbsp;
