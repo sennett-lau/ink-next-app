@@ -29,10 +29,19 @@ export default function Home() {
     }
   }
 
+  const onBannerSelect = (banner: string) => {
+    setBannerBackground(banner)
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
   return (
-    <div className='w-full flex-1 flex justify-center items-center'>
-      <div className='w-full flex flex-1 max-w-[1440px] mx-auto px-6 py-8'>
-        <div className='flex w-2/3 justify-center items-center flex-col gap-8'>
+    <div className='w-full flex-1 flex justify-center items-center py-10 lg:py-0'>
+      <div className='w-full flex flex-col lg:flex-row flex-1 max-w-[1440px] mx-auto px-2 lg:px-6 py-8'>
+        <div className='flex w-full lg:w-2/3 justify-center items-center flex-col gap-8 mb-4 lg:mb-0'>
           <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} containerRef={containerRef} />
           <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
             {/* <button className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'>
@@ -46,7 +55,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className='w-1/3 pl-2 pr-0 xl:px-8'>
+        <div className='w-fit max-w-full lg:w-1/3 lg:px-2 xl:px-8 mx-auto'>
           <div className='flex flex-col w-full rounded-2xl bg-white bg-opacity-50 px-4 py-4 shadow-xl min-h-[400px]'>
             <div className='flex gap-2'>
               <label className='text-black italic font-bold pointer' htmlFor='ink-id'>
@@ -61,8 +70,8 @@ export default function Home() {
               />
             </div>
             <p className='text-black italic font-bold text-lg mt-4 w-full text-left'>Choose a banner Background:</p>
-            <div className='flex flex-col gap-2'>
-              <div className='flex flex-col gap-2 min-h-[376px]'>
+            <div className='flex flex-col gap-2 max-w-full'>
+              <div className='flex flex-col gap-2 w-full lg:min-h-[376px]'>
                 {banners.slice((bannerPage - 1) * 3, bannerPage * 3).map((banner, index) => (
                   <div className='max-w-full w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
                     <a
@@ -78,7 +87,7 @@ export default function Home() {
                       alt={banner.name}
                       width={365}
                       height={120}
-                      onClick={() => setBannerBackground(banner.name)}
+                      onClick={() => onBannerSelect(banner.name)}
                     />
                   </div>
                 ))}
