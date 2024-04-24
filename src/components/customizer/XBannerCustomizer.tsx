@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { bannerConfig } from '../../config/banners'
 
 type Props = {
@@ -14,8 +14,12 @@ const XBannerCustomizer = (props: Props) => {
 
   const [bannerPage, setBannerPage] = useState<number>(1)
   const [bannerTotalPages, setBannerTotalPages] = useState<number>(Math.ceil(bannerConfig.length / 3))
+  const [banners, setBanners] = useState([])
 
-  const banners = bannerConfig
+
+  useEffect(() => {
+    setBanners(bannerConfig.sort(() => Math.random() - 0.5))
+  }, [])
 
   const onBannerSelect = (banner: string) => {
     setBannerBackground(banner)
