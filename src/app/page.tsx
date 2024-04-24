@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import CanvasContainer from '../components/canvas/CanvasControl'
 import InkCanvas from '../components/canvas/InkCanvas'
 import { bannerConfig } from '../config/banners'
 
@@ -42,18 +43,7 @@ export default function Home() {
     <div className='w-full flex-1 flex justify-center items-center py-10 lg:py-0'>
       <div className='w-full flex flex-col lg:flex-row flex-1 max-w-[1440px] mx-auto px-2 lg:px-6 py-8'>
         <div className='flex w-full lg:w-2/3 justify-center items-center flex-col gap-8 mb-4 lg:mb-0'>
-          <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} containerRef={containerRef} />
-          <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
-            {/* <button className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'>
-              Share Via X
-            </button> */}
-            <button
-              className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'
-              onClick={downloadImage}
-            >
-              Download
-            </button>
-          </div>
+          <CanvasContainer inkId={inkId} bannerBackground={bannerBackground} />
         </div>
         <div className='w-fit max-w-full lg:w-1/3 lg:px-2 xl:px-8 mx-auto'>
           <div className='flex flex-col w-full rounded-2xl bg-white bg-opacity-50 px-4 py-4 shadow-xl min-h-[400px]'>

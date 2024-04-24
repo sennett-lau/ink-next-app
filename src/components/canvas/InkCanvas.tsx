@@ -6,12 +6,12 @@ type Props = {
   banner: string
   ink: string
   canvasRef: React.RefObject<HTMLCanvasElement>
-  containerRef: React.RefObject<HTMLDivElement>
 }
 
 const InkCanvas = (props: Props) => {
-  const { banner, ink, canvasRef, containerRef } = props
+  const { banner, ink, canvasRef } = props
 
+  const containerRef = useRef<HTMLDivElement>(null)
   const inkRef = useRef<HTMLImageElement>(null)
   const blackLayerRef = useRef<HTMLDivElement>(null)
 
@@ -107,10 +107,7 @@ const InkCanvas = (props: Props) => {
         }}
       >
         <canvas ref={canvasRef} className='opacity-0'></canvas>
-        <div
-          ref={blackLayerRef}
-          className={`absolute top-0 left-0 w-full h-full ${isLoaded ? 'bg-black' : ''}`}
-        />
+        <div ref={blackLayerRef} className={`absolute top-0 left-0 w-full h-full ${isLoaded ? 'bg-black' : ''}`} />
         <img
           ref={inkRef}
           src={`/assets/inks/${ink}.webp`}
