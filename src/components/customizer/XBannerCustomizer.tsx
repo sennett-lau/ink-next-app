@@ -53,6 +53,7 @@ const XBannerCustomizer = (props: Props) => {
                 <a
                   className='italic text-black text-md bg-white bg-opacity-75 rounded-br-lg p-2 absolute top-0 left-0'
                   href={`https://x.com/${banner.by}`}
+                  target='_blank'
                 >
                   @{banner.by}
                 </a>
