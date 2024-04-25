@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { bannerConfig } from '../../config/banners'
+import InkIdInput from './common/InkIdInput'
 
 type Props = {
   inkId: string
@@ -15,7 +16,6 @@ const XBannerCustomizer = (props: Props) => {
   const [bannerPage, setBannerPage] = useState<number>(1)
   const [bannerTotalPages, setBannerTotalPages] = useState<number>(Math.ceil(bannerConfig.length / 3))
   const [banners, setBanners] = useState([])
-
 
   useEffect(() => {
     setBanners(bannerConfig.sort(() => Math.random() - 0.5))
@@ -33,18 +33,7 @@ const XBannerCustomizer = (props: Props) => {
   return (
     <>
       <div className='flex flex-col w-full rounded-2xl bg-white bg-opacity-50 px-4 py-4 shadow-xl min-h-[400px]'>
-        <div className='flex gap-2'>
-          <label className='text-black italic font-bold pointer' htmlFor='ink-id'>
-            INK #:
-          </label>
-          <input
-            className='bg-transparent border-b-2 border-black text-black font-bold italic pl-2 focus:outline-none'
-            type='text'
-            id='ink-id'
-            value={inkId}
-            onChange={(e) => setInkId(e.target.value)}
-          />
-        </div>
+        <InkIdInput inkId={inkId} setInkId={setInkId} />
         <p className='text-black italic font-bold text-lg mt-4 w-full text-left'>Choose a banner Background:</p>
         <div className='flex flex-col gap-2 max-w-full'>
           <div className='flex flex-col gap-2 w-full lg:min-h-[376px]'>
