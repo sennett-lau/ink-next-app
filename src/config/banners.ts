@@ -1,10 +1,10 @@
 export const bannerConfig = [
   {
-    name: 'banner_001',
+    name: 'ink_001',
     by: 'inkonbtc',
   },
   {
-    name: 'banner_002',
+    name: 'ink_002',
     by: 'inkonbtc',
   },
   {
