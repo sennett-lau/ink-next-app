@@ -3,8 +3,8 @@ import { VERSION } from '../../../config/general'
 
 const Footer = () => {
   return (
-    <footer className='w-full fixed bottom-0'>
-      <div className='w-full max-w-[1440px] mx-auto flex justify-between px-6 py-4'>
+    <footer className='w-full lg:fixed bottom-0 bg-white lg:bg-transparent'>
+      <div className='w-full max-w-[1440px] mx-auto flex flex-col-reverse lg:flex-row justify-between px-6 py-4 items-center'>
         <p className='text-black italic font-bold text-lg'>
           By&nbsp;
           <a href='https://x.com/sennettlau_13' target='_blank'>
