@@ -36,7 +36,7 @@ const PFPCustomizer = (props: Props) => {
   }
 
   return (
-    <CustomizerContainer pageIndex={1} setPageIndex={() => {}} totalPages={1}>
+    <CustomizerContainer pageIndex={1} setPageIndex={setBackgroundPage} totalPages={backgroundTotalPages}>
       <InkIdInput inkId={inkId} setInkId={setInkId} />
       <p className='text-black italic font-bold text-lg my-4 w-full text-left'>Select a background:</p>
       <div className='flex flex-col gap-2 max-w-full'>
