@@ -56,3 +56,14 @@ export const bannerConfig = [
     by: 'entertherifts',
   },
 ]
+
+export const pfpBackgroundConfig = [
+  {
+    name: 'ink_001',
+    by: 'inkonbtc',
+  },
+  {
+    name: 'runic_001',
+    by: 'sennettlau_13',
+  },
+]

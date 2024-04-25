@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import CanvasContainer from '../components/canvas/CanvasControl'
 import CanvasTab from '../components/canvas/CanvasTab'
+import PFPCustomizer from '../components/customizer/PFPCustomizer'
 import XBannerCustomizer from '../components/customizer/XBannerCustomizer'
 
 export default function Home() {
@@ -23,12 +24,17 @@ export default function Home() {
           <CanvasContainer inkId={inkId} background={background} inkhronizerIndex={inkhronizerIndex} />
         </div>
         <div className='w-fit max-w-full lg:w-1/3 lg:px-2 xl:px-8 mx-auto'>
-          <XBannerCustomizer
-            inkId={inkId}
-            setInkId={setInkId}
-            bannerBackground={background}
-            setBannerBackground={setBackground}
-          />
+          {inkhronizerIndex === 0 && (
+            <XBannerCustomizer
+              inkId={inkId}
+              setInkId={setInkId}
+              bannerBackground={background}
+              setBannerBackground={setBackground}
+            />
+          )}
+          {inkhronizerIndex === 1 && (
+            <PFPCustomizer inkId={inkId} setInkId={setInkId} background={background} setBackground={setBackground} />
+          )}
         </div>
       </div>
     </div>
