@@ -61,7 +61,7 @@ const PFPCanvas = (props: Props) => {
 
   return (
     <div className={`w-full max-w-[800px]`}>
-      <div className={`w-full mb-4 h-[400px]`}>
+      <div className={`w-full mb-4 h-[300px]`}>
         <canvas ref={canvasRef} className='hidden'></canvas>
         <div
           className='h-full aspect-square mx-auto relative'
@@ -77,8 +77,8 @@ const PFPCanvas = (props: Props) => {
           <img
             src={`/assets/inks/${ink}.webp`}
             alt={ink}
-            width={400}
-            height={400}
+            width={300}
+            height={300}
             className={`absolute bottom-0 left-0 z-20`}
           />
         </div>

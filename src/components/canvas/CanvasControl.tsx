@@ -29,7 +29,7 @@ const CanvasControl = (props: Props) => {
     <>
       {inkhronizerIndex === 0 && <XBannerCanvas banner={background} ink={inkId} canvasRef={canvasRef} />}
       {inkhronizerIndex === 1 && <PFPCanvas background={background} ink={inkId} canvasRef={canvasRef} />}
-      <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
+      <div className='flex justify-center items-center mt-8 text-black font-extrabold'>
         <button
           className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'
           onClick={downloadImage}
