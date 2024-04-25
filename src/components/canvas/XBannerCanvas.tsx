@@ -25,6 +25,8 @@ const XBannerCanvas = (props: Props) => {
     const handleResize = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth)
+        
+        containerRef.current.style.height = `${containerRef.current.offsetWidth / 3}px`
       }
     }
 
@@ -47,8 +49,8 @@ const XBannerCanvas = (props: Props) => {
 
       const inkMaxX = canvas.width - canvas.width / 3
 
-      canvas.width = containerWidth
-      canvas.height = containerWidth / 3
+      canvas.width = 1500
+      canvas.height = 500
 
       if (ctx) {
         const baseImage = new Image()
@@ -106,7 +108,7 @@ const XBannerCanvas = (props: Props) => {
           backgroundSize: 'contain',
         }}
       >
-        <canvas ref={canvasRef} className='opacity-0'></canvas>
+        <canvas ref={canvasRef} className='hidden'></canvas>
         <div ref={blackLayerRef} className={`absolute top-0 left-0 w-full h-full ${isLoaded ? 'bg-black' : ''}`} />
         <img
           ref={inkRef}
