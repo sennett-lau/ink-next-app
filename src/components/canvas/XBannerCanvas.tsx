@@ -8,7 +8,7 @@ type Props = {
   canvasRef: React.RefObject<HTMLCanvasElement>
 }
 
-const InkCanvas = (props: Props) => {
+const XBannerCanvas = (props: Props) => {
   const { banner, ink, canvasRef } = props
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -133,4 +133,4 @@ const InkCanvas = (props: Props) => {
   )
 }
 
-export default InkCanvas
+export default XBannerCanvas

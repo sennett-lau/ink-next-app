@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import InkCanvas from './InkCanvas'
+import XBannerCanvas from './XBannerCanvas'
 
 type Props = {
   inkId: string
@@ -25,7 +25,7 @@ const CanvasControl = (props: Props) => {
 
   return (
     <>
-      <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} />
+      <XBannerCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} />
       <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
         <button
           className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'
