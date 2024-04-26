@@ -1,13 +1,15 @@
 import { useRef } from 'react'
-import InkCanvas from './InkCanvas'
+import XBannerCanvas from './XBannerCanvas'
+import PFPCanvas from './PFPCanvas'
 
 type Props = {
   inkId: string
-  bannerBackground: string
+  background: string
+  inkhronizerIndex: number
 }
 
 const CanvasControl = (props: Props) => {
-  const { inkId, bannerBackground } = props
+  const { inkId, background, inkhronizerIndex } = props
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -18,15 +20,16 @@ const CanvasControl = (props: Props) => {
       const image = canvas.toDataURL('image/png')
       const link = document.createElement('a')
       link.href = image
-      link.download = `inkonbtc-${bannerBackground}-ink_${inkId}.png`
+      link.download = `inkonbtc-${background}-ink_${inkId}.png`
       link.click()
     }
   }
 
   return (
     <>
-      <InkCanvas banner={bannerBackground} ink={inkId} canvasRef={canvasRef} />
-      <div className='flex justify-center items-center gap-12 text-black font-extrabold'>
+      {inkhronizerIndex === 0 && <XBannerCanvas banner={background} ink={inkId} canvasRef={canvasRef} />}
+      {inkhronizerIndex === 1 && <PFPCanvas background={background} ink={inkId} canvasRef={canvasRef} />}
+      <div className='flex justify-center items-center mt-8 text-black font-extrabold'>
         <button
           className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'
           onClick={downloadImage}
