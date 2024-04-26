@@ -47,10 +47,10 @@ const XBannerCanvas = (props: Props) => {
     if (canvas && banner && ink && containerWidth) {
       const ctx = canvas.getContext('2d')
 
-      const inkMaxX = canvas.width - canvas.width / 3
-
       canvas.width = 1500
       canvas.height = 500
+
+      const inkMaxX = canvas.width - canvas.width / 3
 
       if (ctx) {
         const baseImage = new Image()
@@ -73,8 +73,10 @@ const XBannerCanvas = (props: Props) => {
 
           inkImage.src = `/assets/inks/${ink}.webp`
 
+          const inkXPositionOnCanvas = inkXPosition / containerWidth * canvas.width
+
           inkImage.onload = () => {
-            ctx.drawImage(inkImage, Math.min(inkXPosition, inkMaxX), 0, canvas.height, canvas.height)
+            ctx.drawImage(inkImage, Math.min(inkXPositionOnCanvas, inkMaxX), 0, canvas.height, canvas.height)
           }
         }
       }
