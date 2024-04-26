@@ -1,10 +1,10 @@
 export const bannerConfig = [
   {
-    name: 'banner_001',
+    name: 'ink_001',
     by: 'inkonbtc',
   },
   {
-    name: 'banner_002',
+    name: 'ink_002',
     by: 'inkonbtc',
   },
   {
@@ -54,5 +54,16 @@ export const bannerConfig = [
   {
     name: 'rift_001',
     by: 'entertherifts',
+  },
+]
+
+export const pfpBackgroundConfig = [
+  {
+    name: 'ink_001',
+    by: 'inkonbtc',
+  },
+  {
+    name: 'runic_001',
+    by: 'sennettlau_13',
   },
 ]
