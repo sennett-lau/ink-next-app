@@ -60,6 +60,22 @@ export const bannerConfig = [
     by: 'sennettlau_13',
   },
   {
+    name: 'inkonbtc_013',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'inkonbtc_014',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'inkonbtc_015',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'inkonbtc_016',
+    by: 'sennettlau_13',
+  },
+  {
     name: 'hoponopono_001',
     by: 'hoponopono88',
   },
