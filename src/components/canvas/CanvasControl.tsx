@@ -1,15 +1,16 @@
 import { useRef } from 'react'
-import XBannerCanvas from './XBannerCanvas'
 import PFPCanvas from './PFPCanvas'
+import XBannerCanvas from './XBannerCanvas'
 
 type Props = {
   inkId: string
   background: string
   inkhronizerIndex: number
+  companion: string
 }
 
 const CanvasControl = (props: Props) => {
-  const { inkId, background, inkhronizerIndex } = props
+  const { inkId, background, inkhronizerIndex, companion } = props
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -28,7 +29,9 @@ const CanvasControl = (props: Props) => {
   return (
     <>
       {inkhronizerIndex === 0 && <XBannerCanvas banner={background} ink={inkId} canvasRef={canvasRef} />}
-      {inkhronizerIndex === 1 && <PFPCanvas background={background} ink={inkId} canvasRef={canvasRef} />}
+      {inkhronizerIndex === 1 && (
+        <PFPCanvas background={background} ink={inkId} canvasRef={canvasRef} companion={companion} />
+      )}
       <div className='flex justify-center items-center mt-8 text-black font-extrabold'>
         <button
           className='italic py-2 px-4 rounded-lg bg-white shadow-2xl bg-opacity-75 hover:bg-primary-500'

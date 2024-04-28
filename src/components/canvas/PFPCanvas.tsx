@@ -4,11 +4,12 @@ import SliderControl from './SliderControl'
 type Props = {
   background: string
   ink: string
+  companion: string
   canvasRef: React.RefObject<HTMLCanvasElement>
 }
 
 const PFPCanvas = (props: Props) => {
-  const { background, ink, canvasRef } = props
+  const { background, ink, canvasRef, companion } = props
 
   const backgroundBrightnessLayerRef = useRef<HTMLDivElement>(null)
 
@@ -53,6 +54,15 @@ const PFPCanvas = (props: Props) => {
 
           inkImage.onload = () => {
             ctx.drawImage(inkImage, 0, 0, canvas.height, canvas.height)
+
+            if (companion) {
+              const companionImage = new Image()
+              companionImage.src = `/assets/companions/${companion}.webp`
+
+              companionImage.onload = () => {
+                ctx.drawImage(companionImage, 0, 0, canvas.height, canvas.height)
+              }
+            }
           }
         }
       }
@@ -80,6 +90,13 @@ const PFPCanvas = (props: Props) => {
             width={300}
             height={300}
             className={`absolute bottom-0 left-0 z-20`}
+          />
+          <img
+            src={`/assets/companions/${companion}.webp`}
+            alt={companion}
+            width={300}
+            height={300}
+            className={`absolute bottom-0 left-0 z-30 ${companion ? '' : 'hidden'}`}
           />
         </div>
       </div>

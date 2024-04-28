@@ -99,3 +99,10 @@ export const pfpBackgroundConfig = [
     by: 'sennettlau_13',
   },
 ]
+
+export const companionConfig = [
+  {
+    name: 'magic_eden',
+    by: 'inkonbtc',
+  }
+]
