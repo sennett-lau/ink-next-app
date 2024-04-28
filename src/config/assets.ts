@@ -91,6 +91,10 @@ export const bannerConfig = [
     name: 'inkubator_001',
     by: 'INKUBATORFB',
   },
+  {
+    name: 'inkubator_002',
+    by: 'INKUBATORFB',
+  },
 ]
 
 export const pfpBackgroundConfig = [
