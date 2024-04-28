@@ -87,6 +87,10 @@ export const bannerConfig = [
     name: 'rift_001',
     by: 'entertherifts',
   },
+  {
+    name: 'inkubator_001',
+    by: 'INKUBATORFB',
+  },
 ]
 
 export const pfpBackgroundConfig = [
@@ -108,5 +112,5 @@ export const companionConfig = [
   {
     name: 'magic_eden',
     by: 'inkonbtc',
-  }
+  },
 ]
