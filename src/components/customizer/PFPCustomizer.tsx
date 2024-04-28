@@ -107,7 +107,7 @@ const PFPCustomizer = (props: Props) => {
         </select>
       </div>
       <div className='flex flex-col gap-2 max-w-full'>
-        <div className='grid grid-cols-2 gap-2 w-full lg:min-h-[376px]'>
+        <div className='grid grid-cols-2 grid-rows-3 gap-2 w-full lg:min-h-[376px]'>
           {items.slice((page - 1) * ITEM_PER_PAGE, page * ITEM_PER_PAGE).map((item, index) => (
             <div className='max-w-full flex flex-col mx-auto w-[120px] h-[120px] transform hover:scale-105 transition-transform duration-300'>
               <Image
