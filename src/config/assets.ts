@@ -98,6 +98,10 @@ export const pfpBackgroundConfig = [
     name: 'runic_001',
     by: 'sennettlau_13',
   },
+  {
+    name: 'inkubator_001',
+    by: 'INKUBATORFB',
+  },
 ]
 
 export const companionConfig = [
