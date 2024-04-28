@@ -40,12 +40,26 @@ const PFPCustomizer = (props: Props) => {
     const backgrounds = pfpBackgroundConfig.sort(() => Math.random() - 0.5)
 
     setBackgrounds(backgrounds)
-    setItems(backgrounds)
 
     setCurrItem(background)
 
     setCompanions(companionConfig.sort(() => Math.random() - 0.5))
   }, [])
+
+  useEffect(() => {
+    switch (componentKey) {
+      case 'background':
+        setItems(backgrounds)
+        setCurrItem(background)
+        setTotalPages(Math.ceil(backgrounds.length / ITEM_PER_PAGE))
+        break
+      case 'companion':
+        setItems(companions)
+        setCurrItem(companion)
+        setTotalPages(Math.ceil(companions.length / ITEM_PER_PAGE))
+        break
+    }
+  }, [componentKey, backgrounds, companions])
 
   const onItemSelect = (item: string) => {
     switch (componentKey) {
@@ -70,32 +84,6 @@ const PFPCustomizer = (props: Props) => {
     })
   }
 
-  const onComponentSelect = (componentKey: string) => {
-    setComponentKey(componentKey)
-
-    let amount = 0
-
-    switch (componentKey) {
-      case 'background':
-        amount = pfpBackgroundConfig.length
-        setItems(backgrounds)
-        setCurrItem(background)
-        break
-      case 'companion':
-        setItems(companions)
-        setCurrItem(companion)
-        amount = companionConfig.length
-        break
-    }
-
-    setTotalPages(Math.ceil(amount / ITEM_PER_PAGE))
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
   const getSrc = (item: string) => {
     switch (componentKey) {
       case 'background':
@@ -112,7 +100,7 @@ const PFPCustomizer = (props: Props) => {
         <p className='text-black italic font-bold text-lg my-4 w-full text-left'>{labels[componentKey]}</p>
         <select
           className='h-6 text-black text-sm focus:outline-none shadow-md rounded-md'
-          onChange={(e) => onComponentSelect(e.target.value)}
+          onChange={(e) => setComponentKey(e.target.value)}
         >
           <option value='background'>Background</option>
           <option value='companion'>Companion</option>
