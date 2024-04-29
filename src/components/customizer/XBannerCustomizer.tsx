@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { bannerConfig } from '../../config/background'
+import { bannerConfig } from '../../config/assets'
 import CustomizerContainer from './common/CustomizerContainer'
 import InkIdInput from './common/InkIdInput'
 

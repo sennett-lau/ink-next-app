@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { pfpBackgroundConfig } from '../../config/background'
+import { companionConfig, pfpBackgroundConfig } from '../../config/assets'
 import CustomizerContainer from './common/CustomizerContainer'
 import InkIdInput from './common/InkIdInput'
 
@@ -9,25 +9,74 @@ type Props = {
   setInkId: (inkId: string) => void
   background: string
   setBackground: (background: string) => void
+  companion: string
+  setCompanion: (companion: string) => void
 }
 
-const BACKGROUND_PER_PAGE = 6
+const ITEM_PER_PAGE = 6
 
 const PFPCustomizer = (props: Props) => {
-  const { inkId, setInkId, background, setBackground } = props
+  const { inkId, setInkId, background, setBackground, companion, setCompanion } = props
 
-  const [backgroundPage, setBackgroundPage] = useState<number>(1)
-  const [backgroundTotalPages, setBackgroundTotalPages] = useState<number>(
-    Math.ceil(pfpBackgroundConfig.length / BACKGROUND_PER_PAGE),
-  )
+  const [page, setPage] = useState<number>(1)
+  const [totalPages, setTotalPages] = useState<number>(Math.ceil(pfpBackgroundConfig.length / ITEM_PER_PAGE))
   const [backgrounds, setBackgrounds] = useState([])
+  const [companions, setCompanions] = useState([])
+
+  const [items, setItems] = useState([])
+
+  const [currItem, setCurrItem] = useState<string>('')
+
+  // background
+  // companion
+  const [componentKey, setComponentKey] = useState<string>('background')
+
+  const labels = {
+    background: 'Select a background:',
+    companion: 'Select a companion:',
+  }
 
   useEffect(() => {
-    setBackgrounds(pfpBackgroundConfig.sort(() => Math.random() - 0.5))
+    const backgrounds = pfpBackgroundConfig.sort(() => Math.random() - 0.5)
+
+    setBackgrounds(backgrounds)
+
+    setCurrItem(background)
+
+    setCompanions(companionConfig.sort(() => Math.random() - 0.5))
   }, [])
 
-  const onBackgroundSelect = (background: string) => {
-    setBackground(background)
+  useEffect(() => {
+    switch (componentKey) {
+      case 'background':
+        setItems(backgrounds)
+        setCurrItem(background)
+        setTotalPages(Math.ceil(backgrounds.length / ITEM_PER_PAGE))
+        break
+      case 'companion':
+        setItems(companions)
+        setCurrItem(companion)
+        setTotalPages(Math.ceil(companions.length / ITEM_PER_PAGE))
+        break
+    }
+  }, [componentKey, backgrounds, companions])
+
+  const onItemSelect = (item: string) => {
+    switch (componentKey) {
+      case 'background':
+        setBackground(item)
+        setCurrItem(item)
+        break
+      case 'companion':
+        if (item === companion) {
+          setCompanion('')
+          setCurrItem('')
+          break
+        }
+        setCompanion(item)
+        setCompanion(item)
+        break
+    }
 
     window.scrollTo({
       top: 0,
@@ -35,30 +84,46 @@ const PFPCustomizer = (props: Props) => {
     })
   }
 
+  const getSrc = (item: string) => {
+    switch (componentKey) {
+      case 'background':
+        return `/assets/pfp-backgrounds/${item}.webp`
+      case 'companion':
+        return `/assets/companions/${item}.webp`
+    }
+  }
+
   return (
-    <CustomizerContainer pageIndex={1} setPageIndex={setBackgroundPage} totalPages={backgroundTotalPages}>
+    <CustomizerContainer pageIndex={1} setPageIndex={setPage} totalPages={totalPages}>
       <InkIdInput inkId={inkId} setInkId={setInkId} />
-      <p className='text-black italic font-bold text-lg my-4 w-full text-left'>Select a background:</p>
+      <div className='flex justify-between items-center'>
+        <p className='text-black italic font-bold text-lg my-4 w-full text-left'>{labels[componentKey]}</p>
+        <select
+          className='h-6 text-black text-sm focus:outline-none shadow-md rounded-md'
+          onChange={(e) => setComponentKey(e.target.value)}
+        >
+          <option value='background'>Background</option>
+          <option value='companion'>Companion</option>
+        </select>
+      </div>
       <div className='flex flex-col gap-2 max-w-full'>
-        <div className='grid grid-cols-2 gap-2 w-full lg:min-h-[376px]'>
-          {backgrounds
-            .slice((backgroundPage - 1) * BACKGROUND_PER_PAGE, backgroundPage * BACKGROUND_PER_PAGE)
-            .map((banner, index) => (
-              <div className='max-w-full flex flex-col mx-auto w-[120px] h-[120px] transform hover:scale-105 transition-transform duration-300'>
-                <Image
-                  className={`cursor-pointer mx-auto ${background === banner.name ? 'max-w-full border-2 border-primary-500' : ''}`}
-                  key={index}
-                  src={`/assets/pfp-backgrounds/${banner.name}.webp`}
-                  alt={banner.name}
-                  width={100}
-                  height={100}
-                  onClick={() => onBackgroundSelect(banner.name)}
-                />
-                <a className='text-center italic text-black text-sm' href={`https://x.com/${banner.by}`} target='_blank'>
-                  @{banner.by}
-                </a>
-              </div>
-            ))}
+        <div className='grid grid-cols-2 grid-rows-3 gap-2 w-full lg:min-h-[376px]'>
+          {items.slice((page - 1) * ITEM_PER_PAGE, page * ITEM_PER_PAGE).map((item, index) => (
+            <div className='max-w-full flex flex-col mx-auto w-[120px] h-[120px] transform hover:scale-105 transition-transform duration-300'>
+              <Image
+                className={`cursor-pointer mx-auto ${currItem === item.name ? 'max-w-full border-2 border-primary-500' : ''}`}
+                key={index}
+                src={getSrc(item.name)}
+                alt={item.name}
+                width={100}
+                height={100}
+                onClick={() => onItemSelect(item.name)}
+              />
+              <a className='text-center italic text-black text-sm' href={`https://x.com/${item.by}`} target='_blank'>
+                @{item.by}
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </CustomizerContainer>
