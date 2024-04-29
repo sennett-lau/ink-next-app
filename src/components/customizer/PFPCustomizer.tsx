@@ -89,7 +89,7 @@ const PFPCustomizer = (props: Props) => {
       case 'background':
         return `/assets/pfp-backgrounds/${item}.webp`
       case 'companion':
-        return `/assets/companions/${item}.webp`
+        return `/assets/companions/${item}_preview.webp`
     }
   }
 
