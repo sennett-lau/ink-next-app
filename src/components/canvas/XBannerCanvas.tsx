@@ -4,28 +4,29 @@ import SliderControl from './SliderControl'
 
 type Props = {
   banner: string
-  ink: string
+  inks: string[]
   canvasRef: React.RefObject<HTMLCanvasElement>
 }
 
 const XBannerCanvas = (props: Props) => {
-  const { banner, ink, canvasRef } = props
+  const { banner, inks, canvasRef } = props
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const inkRef = useRef<HTMLImageElement>(null)
   const blackLayerRef = useRef<HTMLDivElement>(null)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const [containerWidth, setContainerWidth] = useState<number>(0)
-  const [inkXPosition, setInkXPosition] = useState<number>(0)
+  const [inkXPositions, setInkXPositions] = useState<number[]>([])
   const [blackLayerOpacity, setBlackLayerOpacity] = useState<number>(25)
+
+  const [inkIdToPosition, setInkIdToPosition] = useState<{ [key: string]: number }>({})
 
   useEffect(() => {
     const handleResize = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth)
-        
+
         containerRef.current.style.height = `${containerRef.current.offsetWidth / 3}px`
       }
     }
@@ -37,28 +38,36 @@ const XBannerCanvas = (props: Props) => {
   }, [])
 
   useEffect(() => {
+    if (inks.length !== inkXPositions.length) {
+      const newInkXPositions = inks.map((ink) => inkIdToPosition[ink] || 0)
+
+      newInkXPositions.forEach((pos, index) => {
+        const inkLayer = document.getElementById(`ink-layer-${index}`)
+
+        if (inkLayer) {
+          inkLayer.style.transform = `translateX(${pos}px)`
+        }
+      })
+
+      setInkXPositions(newInkXPositions)
+    }
     if (containerWidth > 0) {
       drawImages()
     }
-  }, [banner, ink, containerWidth, inkXPosition, blackLayerOpacity])
+  }, [banner, inks, containerWidth, inkXPositions, blackLayerOpacity])
 
   const drawImages = () => {
     const canvas = canvasRef.current
-    if (canvas && banner && ink && containerWidth) {
+    if (canvas && banner && inks && containerWidth) {
       const ctx = canvas.getContext('2d')
 
       canvas.width = 1500
       canvas.height = 500
 
-      const inkMaxX = canvas.width - canvas.width / 3
-
       if (ctx) {
         const baseImage = new Image()
-        const inkImage = new Image()
 
         baseImage.src = `/assets/banner-backgrounds/${banner}.webp`
-
-        console.log(`Using banner: ${baseImage.src} and ink: ${inkImage.src}`)
 
         baseImage.onload = () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -71,15 +80,30 @@ const XBannerCanvas = (props: Props) => {
 
           setIsLoaded(true)
 
-          inkImage.src = `/assets/inks/${ink}.webp`
-
-          const inkXPositionOnCanvas = inkXPosition / containerWidth * canvas.width
-
-          inkImage.onload = () => {
-            ctx.drawImage(inkImage, Math.min(inkXPositionOnCanvas, inkMaxX), 0, canvas.height, canvas.height)
-          }
+          drawInks(canvas, 0)
         }
       }
+    }
+  }
+
+  const drawInks = (canvas: HTMLCanvasElement, index: number) => {
+    if (index >= inks.length) {
+      return
+    }
+    const ctx = canvas.getContext('2d')
+
+    const inkMaxX = canvas.width - canvas.width / 3
+
+    const inkImage = new Image()
+
+    inkImage.src = `/assets/inks/${inks[index]}.webp`
+
+    const inkXPositionOnCanvas = (inkXPositions[index] / containerWidth) * canvas.width
+
+    inkImage.onload = () => {
+      ctx.drawImage(inkImage, Math.min(inkXPositionOnCanvas, inkMaxX), 0, canvas.height, canvas.height)
+
+      drawInks(canvas, index + 1)
     }
   }
 
@@ -91,12 +115,22 @@ const XBannerCanvas = (props: Props) => {
     }
   }
 
-  const handleInkXPositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInkXPosition(parseInt(e.target.value))
+  const handleInkXPositionChange = (pos: number, index: number) => {
+    const newInkXPositions = [...inkXPositions]
+    newInkXPositions[index] = pos
 
-    // update imageRef position
-    if (inkRef.current) {
-      inkRef.current.style.transform = `translateX(${inkXPosition}px)`
+    setInkXPositions(newInkXPositions)
+
+    const inkLayer = document.getElementById(`ink-layer-${index}`)
+
+    const newMap = { ...inkIdToPosition }
+
+    newMap[inks[index]] = newInkXPositions[index]
+
+    setInkIdToPosition(newMap)
+
+    if (inkLayer) {
+      inkLayer.style.transform = `translateX(${newInkXPositions[index]}px)`
     }
   }
 
@@ -112,27 +146,35 @@ const XBannerCanvas = (props: Props) => {
       >
         <canvas ref={canvasRef} className='hidden'></canvas>
         <div ref={blackLayerRef} className={`absolute top-0 left-0 w-full h-full ${isLoaded ? 'bg-black' : ''}`} />
-        <img
-          ref={inkRef}
-          src={`/assets/inks/${ink}.webp`}
-          alt={ink}
-          width={containerWidth / 3}
-          height={containerWidth / 3}
-          className={`absolute bottom-0 left-0 z-20`}
-        />
+        {inks.length > 0 &&
+          inks.map((ink, index) => (
+            <img
+              key={index}
+              src={`/assets/inks/${ink}.webp`}
+              alt={ink}
+              width={containerWidth / 3}
+              height={containerWidth / 3}
+              className={`absolute bottom-0 left-0 z-20`}
+              id={`ink-layer-${index}`}
+            />
+          ))}
       </div>
-      <SliderControl
-        label='Ink Position'
-        max={containerWidth - containerWidth / 3}
-        value={inkXPosition}
-        onChange={handleInkXPositionChange}
-      />
       <SliderControl
         label='Black Layer Opacity'
         max={100}
         value={blackLayerOpacity}
         onChange={handleBackgroundBlackLayerChange}
       />
+      {inkXPositions.length > 0 &&
+        inkXPositions.map((inkXPosition, index) => (
+          <SliderControl
+            key={index}
+            label={`Ink ${index + 1} Position`}
+            max={containerWidth - containerWidth / 3}
+            value={inkXPosition}
+            onChange={(e) => handleInkXPositionChange(parseInt(e.target.value), index)}
+          />
+        ))}
     </div>
   )
 }
