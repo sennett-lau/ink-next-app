@@ -4,13 +4,14 @@ import XBannerCanvas from './XBannerCanvas'
 
 type Props = {
   inkId: string
+  inkIds: string[]
   background: string
   inkhronizerIndex: number
   companion: string
 }
 
 const CanvasControl = (props: Props) => {
-  const { inkId, background, inkhronizerIndex, companion } = props
+  const { inkId, inkIds, background, inkhronizerIndex, companion } = props
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -28,7 +29,7 @@ const CanvasControl = (props: Props) => {
 
   return (
     <>
-      {inkhronizerIndex === 0 && <XBannerCanvas banner={background} ink={inkId} canvasRef={canvasRef} />}
+      {inkhronizerIndex === 0 && <XBannerCanvas banner={background} inks={inkIds} canvasRef={canvasRef} />}
       {inkhronizerIndex === 1 && (
         <PFPCanvas background={background} ink={inkId} canvasRef={canvasRef} companion={companion} />
       )}
