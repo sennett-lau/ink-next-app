@@ -48,16 +48,17 @@ const InkIdMultiInput = (props: Props) => {
         {inkIds.map((id, index) => (
           <button
             key={index}
-            className='bg-white text-black font-sm w-14 h-8 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200 transition-all duration-300 relative'
+            className='bg-white text-black font-sm w-18 h-8 px-2 rounded-md shadow-md flex items-center justify-center hover:bg-gray-200 transition-all duration-300'
             onClick={() => onRemoveInkId(index)}
           >
-            {id}
+            <span className='flex-1'>
+              {id}
+            </span>
             <Image
               src='/icons/cancel.svg'
               alt='cancel'
-              width={20}
-              height={20}
-              className='absolute right-0 top-1/2 transform -translate-y-1/2'
+              width={16}
+              height={16}
             />
           </button>
         ))}
