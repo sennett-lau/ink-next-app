@@ -95,6 +95,10 @@ export const bannerConfig = [
     name: 'inkubator_002',
     by: 'INKUBATORFB',
   },
+  {
+    name: 'inkhronizer_001',
+    by: 'sennettlau_13',
+  },
 ]
 
 export const pfpBackgroundConfig = [
