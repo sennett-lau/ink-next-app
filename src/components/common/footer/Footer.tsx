@@ -8,7 +8,7 @@ const Footer = () => {
         <p className='text-black italic font-bold text-lg'>
           By&nbsp;
           <a href='https://x.com/sennettlau_13' target='_blank'>
-            Sennett Lau
+            Sennett Lau - Capyyy
           </a>
           &nbsp;| <span className='text-primary-500'>INKhonizer v{VERSION}</span>
         </p>
