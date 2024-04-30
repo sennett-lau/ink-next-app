@@ -2,17 +2,17 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { bannerConfig } from '../../config/assets'
 import CustomizerContainer from './common/CustomizerContainer'
-import InkIdInput from './common/InkIdInput'
+import InkIdMultiInput from './common/InkIdMultiInput'
 
 type Props = {
-  inkId: string
-  setInkId: (inkId: string) => void
+  inkIds: string[]
+  setInkIds: (inkIds: string[]) => void
   bannerBackground: string
   setBannerBackground: (bannerBackground: string) => void
 }
 
 const XBannerCustomizer = (props: Props) => {
-  const { inkId, bannerBackground, setInkId, setBannerBackground } = props
+  const { inkIds, bannerBackground, setInkIds, setBannerBackground } = props
 
   const [bannerPage, setBannerPage] = useState<number>(1)
   const [bannerTotalPages, setBannerTotalPages] = useState<number>(Math.ceil(bannerConfig.length / 3))
@@ -33,7 +33,7 @@ const XBannerCustomizer = (props: Props) => {
 
   return (
     <CustomizerContainer pageIndex={bannerPage} setPageIndex={setBannerPage} totalPages={bannerTotalPages}>
-      <InkIdInput inkId={inkId} setInkId={setInkId} />
+      <InkIdMultiInput inkIds={inkIds} setInkIds={setInkIds} />
       <p className='text-black italic font-bold text-lg mt-4 w-full text-left'>Choose a banner Background:</p>
       <div className='flex flex-col gap-2 max-w-full'>
         <div className='flex flex-col gap-2 w-full lg:min-h-[376px]'>
