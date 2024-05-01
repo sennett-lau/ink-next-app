@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { chimeraIds, femaleIds, maleIds } from '../../config/inks'
 import SliderControl from './SliderControl'
 
 type Props = {
@@ -17,6 +18,8 @@ const PFPCanvas = (props: Props) => {
 
   const [backgroundBrightness, setBackgroundBrightness] = useState<number>(25)
 
+  const [companionByType, setCompanionByType] = useState<string>('')
+
   useEffect(() => {
     if (backgroundBrightnessLayerRef.current) {
       backgroundBrightnessLayerRef.current.style.opacity = `${backgroundBrightness / 100}`
@@ -26,6 +29,22 @@ const PFPCanvas = (props: Props) => {
 
     drawImages()
   }, [background, ink, backgroundBrightness])
+
+  useEffect(() => {
+    if (companion && ink) {
+      const inkNum = parseInt(ink)
+      console.log(`Ink number: ${inkNum}, Companion: ${companion}`)
+      if (chimeraIds.includes(inkNum)) {
+        setCompanionByType(companion + '_c')
+      } else if (maleIds.includes(inkNum)) {
+        setCompanionByType(companion + '_m')
+      } else if (femaleIds.includes(inkNum)) {
+        setCompanionByType(companion + '_f')
+      } else {
+        setCompanionByType(companion)
+      }
+    }
+  }, [companion, ink])
 
   const drawImages = () => {
     const canvas = canvasRef.current
@@ -92,7 +111,7 @@ const PFPCanvas = (props: Props) => {
             className={`absolute bottom-0 left-0 z-20`}
           />
           <img
-            src={`/assets/companions/${companion}.webp`}
+            src={`/assets/companions/${companionByType}.webp`}
             alt={companion}
             width={300}
             height={300}
