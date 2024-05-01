@@ -1,39 +1,35 @@
-import { inkMetadata } from "./data"
+import { writeFileSync } from 'fs'
+import { inkMetadata } from './data'
 
 const chimera = { s: 1, e: 17 }
 const male = { s: 73, e: 80 }
 const female = { s: 188, e: 193 }
 
 const main = () => {
-  const cIds = []
-  const mIds = []
-  const fIds = []
+  const cIds: number[] = []
+  const mIds: number[] = []
+  const fIds: number[] = []
 
+  let i = 1
   for (const ink of inkMetadata) {
     for (const trait of ink) {
       if (trait >= chimera.s && trait <= chimera.e) {
-        cIds.push(ink)
+        cIds.push(i++)
         break
       } else if (trait >= male.s && trait <= male.e) {
-        mIds.push(ink)
+        mIds.push(i++)
         break
-      } else {
-        fIds.push(ink)
+      } else if (trait >= female.s && trait <= female.e) {
+        fIds.push(i++)
         break
       }
     }
   }
 
-  console.log('===========================================================')
-  console.log('Chimera')
-  console.log(cIds)
-  console.log('===========================================================')
-  console.log('Male')
-  console.log(mIds)
-  console.log('===========================================================')
-  console.log('Female')
-  console.log(fIds)
+  // save the arrays to a ts file
+  const txt = `export const chimeraIds = ${JSON.stringify(cIds)}\nexport const maleIds = ${JSON.stringify(mIds)}\nexport const femaleIds = ${JSON.stringify(fIds)}`
+
+  writeFileSync('inks.ts', txt)
 }
 
 main()
-
