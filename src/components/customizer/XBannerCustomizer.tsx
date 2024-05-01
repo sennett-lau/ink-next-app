@@ -38,7 +38,7 @@ const XBannerCustomizer = (props: Props) => {
       <div className='flex flex-col gap-2 max-w-full'>
         <div className='flex flex-col gap-2 w-full lg:min-h-[376px]'>
           {banners.slice((bannerPage - 1) * 3, bannerPage * 3).map((banner, index) => (
-            <div className='max-w-full w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
+            <div key={index} className='max-w-full w-[365px] h-[120px] relative transform hover:scale-105 transition-transform duration-300'>
               <a
                 className='italic text-black text-md bg-white bg-opacity-75 rounded-br-lg p-2 absolute top-0 left-0'
                 href={`https://x.com/${banner.by}`}
