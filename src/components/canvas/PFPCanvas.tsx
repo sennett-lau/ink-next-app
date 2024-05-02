@@ -28,7 +28,7 @@ const PFPCanvas = (props: Props) => {
     setIsLoaded(true)
 
     drawImages()
-  }, [background, ink, backgroundBrightness])
+  }, [background, ink, backgroundBrightness, companionByType])
 
   useEffect(() => {
     if (companion && ink) {
@@ -74,9 +74,9 @@ const PFPCanvas = (props: Props) => {
           inkImage.onload = () => {
             ctx.drawImage(inkImage, 0, 0, canvas.height, canvas.height)
 
-            if (companion) {
+            if (companionByType) {
               const companionImage = new Image()
-              companionImage.src = `/assets/companions/${companion}.webp`
+              companionImage.src = `/assets/companions/${companionByType}.webp`
 
               companionImage.onload = () => {
                 ctx.drawImage(companionImage, 0, 0, canvas.height, canvas.height)
