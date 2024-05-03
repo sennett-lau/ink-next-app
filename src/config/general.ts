@@ -1,2 +1,2 @@
 export const SITE_URL: string = 'https://ink.sennettlau.me'
-export const VERSION: string = '1.6.2'
+export const VERSION: string = '1.7.0'
