@@ -21,6 +21,7 @@ const XBannerCanvas = (props: Props) => {
   const [blackLayerOpacity, setBlackLayerOpacity] = useState<number>(25)
 
   const [inkIdToPosition, setInkIdToPosition] = useState<{ [key: string]: number }>({})
+  const [inkIdToIsFacingLeft, setInkIdToIsFacingLeft] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,21 +41,28 @@ const XBannerCanvas = (props: Props) => {
   useEffect(() => {
     if (inks.length !== inkXPositions.length) {
       const newInkXPositions = inks.map((ink) => inkIdToPosition[ink] || 0)
+      const newInkFacings: { [key: string]: boolean } = {}
+
+      for (const ink of inks) {
+        newInkFacings[ink] =
+          inkIdToIsFacingLeft[ink] === undefined || inkIdToIsFacingLeft[ink] === null || inkIdToIsFacingLeft[ink]
+      }
 
       newInkXPositions.forEach((pos, index) => {
         const inkLayer = document.getElementById(`ink-layer-${index}`)
 
         if (inkLayer) {
-          inkLayer.style.transform = `translateX(${pos}px)`
+          inkLayer.style.transform = `translateX(${pos}px) scaleX(${newInkFacings[inks[index]] ? 1 : -1})`
         }
       })
 
       setInkXPositions(newInkXPositions)
+      setInkIdToIsFacingLeft(newInkFacings)
     }
     if (containerWidth > 0) {
       drawImages()
     }
-  }, [banner, inks, containerWidth, inkXPositions, blackLayerOpacity])
+  }, [banner, inks, containerWidth, inkXPositions, inkIdToIsFacingLeft, blackLayerOpacity])
 
   const drawImages = () => {
     const canvas = canvasRef.current
@@ -98,10 +106,23 @@ const XBannerCanvas = (props: Props) => {
 
     inkImage.src = `/assets/inks/${inks[index]}.webp`
 
+    const isFacingLeft =
+      inkIdToIsFacingLeft[inks[index]] === undefined ||
+      inkIdToIsFacingLeft[inks[index]] === null ||
+      inkIdToIsFacingLeft[inks[index]]
+
     const inkXPositionOnCanvas = (inkXPositions[index] / containerWidth) * canvas.width
 
     inkImage.onload = () => {
-      ctx.drawImage(inkImage, Math.min(inkXPositionOnCanvas, inkMaxX), 0, canvas.height, canvas.height)
+      if (isFacingLeft) {
+        ctx.drawImage(inkImage, Math.min(inkXPositionOnCanvas, inkMaxX), 0, canvas.height, canvas.height)
+      } else {
+        ctx.save()
+        ctx.translate(Math.min(inkXPositionOnCanvas, inkMaxX) + canvas.height, 0)
+        ctx.scale(-1, 1)
+        ctx.drawImage(inkImage, 0, 0, canvas.height, canvas.height)
+        ctx.restore()
+      }
 
       drawInks(canvas, index + 1)
     }
@@ -130,7 +151,20 @@ const XBannerCanvas = (props: Props) => {
     setInkIdToPosition(newMap)
 
     if (inkLayer) {
-      inkLayer.style.transform = `translateX(${newInkXPositions[index]}px)`
+      inkLayer.style.transform = `translateX(${newInkXPositions[index]}px) scaleX(${inkIdToIsFacingLeft[inks[index]] ? 1 : -1})`
+    }
+  }
+
+  const onToggleFacing = (isFacingLeft: boolean, index: number) => {
+    const newInkFacings = { ...inkIdToIsFacingLeft }
+    newInkFacings[inks[index]] = isFacingLeft
+
+    setInkIdToIsFacingLeft(newInkFacings)
+
+    const inkLayer = document.getElementById(`ink-layer-${index}`)
+
+    if (inkLayer) {
+      inkLayer.style.transform = `translateX(${inkXPositions[index]}px) scaleX(${isFacingLeft ? 1 : -1})`
     }
   }
 
@@ -173,6 +207,10 @@ const XBannerCanvas = (props: Props) => {
             max={containerWidth - containerWidth / 3}
             value={inkXPosition}
             onChange={(e) => handleInkXPositionChange(parseInt(e.target.value), index)}
+            toggleLabel='Facing'
+            toggleTextPair={['L', 'R']}
+            toggleValue={inkIdToIsFacingLeft[inks[index]]}
+            onToggle={(isFacingLeft) => onToggleFacing(isFacingLeft, index)}
           />
         ))}
     </div>
