@@ -99,6 +99,18 @@ export const bannerConfig = [
     name: 'inkhronizer_001',
     by: 'sennettlau_13',
   },
+  {
+    name: 'brc137_r',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'brc137_o',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'brc137_g',
+    by: 'sennettlau_13',
+  },
 ]
 
 export const pfpBackgroundConfig = [
