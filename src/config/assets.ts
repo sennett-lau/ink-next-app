@@ -121,4 +121,24 @@ export const companionConfig = [
     name: 'magic_eden',
     by: 'inkonbtc',
   },
+  {
+    name: 'frenchie_gray_dark',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'frenchie_gray_light',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'frenchie_orange_light',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'frenchie_orange_dark',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'frenchie_orange_dark_o',
+    by: 'sennettlau_13',
+  },
 ]
