@@ -5,7 +5,7 @@ const Header = () => {
   const { address } = useOrdConnect()
 
   const displayAddress = () => {
-    if (address) {
+    if (address && address.ordinals) {
       // get first 4 and ... last 4
       return `${address.ordinals.slice(0, 4)}...${address.ordinals.slice(-4)}`
     }
