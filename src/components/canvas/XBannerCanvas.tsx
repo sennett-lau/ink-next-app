@@ -188,7 +188,7 @@ const XBannerCanvas = (props: Props) => {
               alt={ink}
               width={containerWidth / 3}
               height={containerWidth / 3}
-              className={`absolute bottom-0 left-0 z-20`}
+              className={`absolute bottom-0 left-0 z-[10]`}
               id={`ink-layer-${index}`}
             />
           ))}
