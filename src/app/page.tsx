@@ -1,5 +1,6 @@
 'use client'
 
+import { useOrdConnect } from '@ordzaar/ord-connect'
 import { useState } from 'react'
 import CanvasContainer from '../components/canvas/CanvasControl'
 import CanvasTab from '../components/canvas/CanvasTab'
@@ -7,6 +8,8 @@ import PFPCustomizer from '../components/customizer/PFPCustomizer'
 import XBannerCustomizer from '../components/customizer/XBannerCustomizer'
 
 export default function Home() {
+  const { address } = useOrdConnect()
+
   const tabs = ['X Banner', 'PFP']
 
   // 0 - X Banner Customizer

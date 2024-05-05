@@ -1,11 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Footer from '../components/common/footer/Footer'
-import Header from '../components/common/header/Header'
 import { SITE_URL } from '../config/general'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import AppWrapper from '../components/common/AppWrapper'
 
 export const metadata: Metadata = {
   title: 'INKhronizer - Banner Creator | Ink',
@@ -55,11 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <Header />
-        <main className='flex min-h-screen flex-col items-center justify-between bg-dotted'>{children}</main>
-        <Footer />
-      </body>
+      <AppWrapper>{children}</AppWrapper>
     </html>
   )
 }
