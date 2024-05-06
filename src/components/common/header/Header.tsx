@@ -2,14 +2,6 @@ import { OrdConnectKit, useOrdConnect, useSignMessage } from '@ordzaar/ord-conne
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-enum Wallet {
-  UNISAT = 'unisat',
-  XVERSE = 'xverse',
-  MAGICEDEN = 'magiceden',
-  LEATHER = 'leather',
-  OKX = 'okx',
-}
-
 const Header = () => {
   const { address, disconnectWallet, wallet } = useOrdConnect()
   const { signMsg } = useSignMessage()
