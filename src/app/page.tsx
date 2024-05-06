@@ -5,12 +5,14 @@ import CanvasContainer from '../components/canvas/CanvasControl'
 import CanvasTab from '../components/canvas/CanvasTab'
 import PFPCustomizer from '../components/customizer/PFPCustomizer'
 import XBannerCustomizer from '../components/customizer/XBannerCustomizer'
+import Generator from '../components/customizer/Generator'
 
 export default function Home() {
-  const tabs = ['X Banner', 'PFP']
+  const tabs = ['X Banner', 'PFP', 'Generator']
 
   // 0 - X Banner Customizer
   // 1 - PFP Customizer
+  // 2 - Generator
   const [inkhronizerIndex, setInkhronizerIndex] = useState<number>(0)
 
   const [background, setBackground] = useState<string>('ink_001')
@@ -21,6 +23,13 @@ export default function Home() {
   // for PFP
   const [inkId, setInkId] = useState<string>('1')
   const [companion, setCompanion] = useState<string>('')
+
+  // for generator
+  const [selectedOption, setSelectedOption] = useState<string>('')
+
+  const handleSelectedOptionChange = (option) => {
+    setSelectedOption(option);
+  };
 
   return (
     <div className='w-full flex-1 flex justify-center items-center py-10 lg:py-0'>
@@ -33,6 +42,7 @@ export default function Home() {
             background={background}
             inkhronizerIndex={inkhronizerIndex}
             companion={companion}
+            selectedOption={selectedOption}
           />
         </div>
         <div className='w-fit max-w-full lg:w-1/3 lg:px-2 xl:px-8 mx-auto'>
@@ -52,6 +62,13 @@ export default function Home() {
               setBackground={setBackground}
               companion={companion}
               setCompanion={setCompanion}
+            />
+          )}
+          {inkhronizerIndex === 2 && (
+            <Generator
+              inkId={inkId}
+              setInkId={setInkId}
+              onSelectedOptionChange={handleSelectedOptionChange}
             />
           )}
         </div>

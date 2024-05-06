@@ -154,3 +154,11 @@ export const companionConfig = [
     by: 'sennettlau_13',
   },
 ]
+
+export const generatorAssetsConfig = [
+  { name: 'GM', svg: 'gm.svg' },
+  { name: 'GN', svg: 'gn.svg' },
+  /* { name: 'Art for art sake', svg: 'art-for-art-sake.svg' },
+  { name: 'INK is for the people', svg: 'ink-is-for-the-people.svg' },
+  { name: 'Legacy Sats', svg: 'legacy-sats.svg' } */
+];
