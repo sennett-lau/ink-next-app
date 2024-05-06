@@ -14,7 +14,7 @@ export const hiroApiGetInkHoldings = async (address: string, page?: number): Pro
   const offset = page ? page * limit : 0
 
   const { data } = await hiroAPI.get(
-    `/ordinals/v1/inscriptions?from_number=${inkInscriptionNumbers.from}&to_number=${inkInscriptionNumbers.to}address=${address}&limit=${limit}&offset=${offset}`,
+    `/ordinals/v1/inscriptions?from_number=${inkInscriptionNumbers.from}&to_number=${inkInscriptionNumbers.to}&address=${address}&limit=${limit}&offset=${offset}`,
   )
 
   return data as HiroApiListOfInscriptionsResponse
