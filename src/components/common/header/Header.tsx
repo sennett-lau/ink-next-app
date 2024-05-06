@@ -1,11 +1,6 @@
-import { OrdConnectKit, useOrdConnect } from '@ordzaar/ord-connect'
+import { OrdConnectKit, useOrdConnect, useSignMessage } from '@ordzaar/ord-connect'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
-import { signMessage as okxSignMessage } from '@ordzaar/ordit-sdk/okx'
-import { signMessage as magicedenSignMessage } from '@ordzaar/ordit-sdk/magiceden'
-import { signMessage as unisatSignMessage } from '@ordzaar/ordit-sdk/unisat'
-import { signMessage as xverseSignMessage } from '@ordzaar/ordit-sdk/xverse'
 
 enum Wallet {
   UNISAT = 'unisat',
@@ -17,6 +12,7 @@ enum Wallet {
 
 const Header = () => {
   const { address, disconnectWallet, wallet } = useOrdConnect()
+  const { signMsg } = useSignMessage()
 
   const [isSigned, setIsSigned] = useState(false)
 
@@ -24,22 +20,7 @@ const Header = () => {
     if (address && address.ordinals && !isSigned && wallet) {
       const message = 'Welcome to INK Community'
       try {
-        switch (wallet) {
-          case Wallet.UNISAT:
-            unisatSignMessage(message)
-            break
-          case Wallet.XVERSE:
-            xverseSignMessage(message, address.ordinals)
-            break
-          case Wallet.MAGICEDEN:
-            magicedenSignMessage(message, address.ordinals)
-            break
-          case Wallet.OKX:
-            okxSignMessage(message)
-            break
-          default:
-            break
-        }
+        signMsg(address.ordinals, message)
         setIsSigned(true)
       } catch (error) {
         console.error(error)
