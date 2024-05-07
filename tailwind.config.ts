@@ -11,10 +11,13 @@ const config: Config = {
       backgroundImage: {
         'header-bg': "url('/web/header-bg.png')",
         'dotted': "url('/web/dotted.png')",
+        'v1_dark': "url('/web/v1_dark.jpg')",
       },
       colors: {
         primary: {
           500: '#FD8603', // logo orange
+          600: '#EF7807', // logo orange darker
+          700: '#D86100', // logo orange darker
         },
         secondary: {},
         dark: {
