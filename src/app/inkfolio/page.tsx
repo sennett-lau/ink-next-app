@@ -2,10 +2,23 @@
 
 import { useOrdConnect } from '@ordzaar/ord-connect'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { SITE_URL } from '../../config/general'
 
 const InkfolioLanding = () => {
-  const { openModal } = useOrdConnect()
+  const { openModal, address } = useOrdConnect()
+
+  useEffect(() => {
+    if (address && address.ordinals) {
+      // if on dev, use localhost
+      if (process.env.NODE_ENV === 'development') {
+        window.location.href = `http://localhost:3000/inkfolio/${address.ordinals}`
+        return
+      }
+      
+      window.location.href = `${SITE_URL}/inkfolio/${address.ordinals}`
+    }
+  }, [address])
 
   return (
     <div className='flex flex-col w-full flex-1 bg-black'>
