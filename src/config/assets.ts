@@ -113,12 +113,28 @@ export const bannerConfig = [
   },
   {
     name: 'inkonbtc_017',
-    by: 'inkonbtc',
+    by: 'sennettlau_13',
   },
   {
     name: 'poster_001',
+    by: 'inkonbtc',
+  },
+  {
+    name: 'poster_002',
     by: 'sennettlau_13',
-  }
+  },
+  {
+    name: 'inkonbtc_018',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'inkonbtc_019',
+    by: 'sennettlau_13',
+  },
+  {
+    name: 'inkonbtc_020',
+    by: 'sennettlau_13',
+  },
 ]
 
 export const pfpBackgroundConfig = [
