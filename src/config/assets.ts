@@ -121,7 +121,7 @@ export const bannerConfig = [
   },
   {
     name: 'poster_002',
-    by: 'sennettlau_13',
+    by: 'inkonbtc',
   },
   {
     name: 'inkonbtc_018',
