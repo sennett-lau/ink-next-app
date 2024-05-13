@@ -135,6 +135,10 @@ export const bannerConfig = [
     name: 'inkonbtc_020',
     by: 'sennettlau_13',
   },
+  {
+    name: 'keningng_001',
+    by: 'keningng',
+  },
 ]
 
 export const pfpBackgroundConfig = [
