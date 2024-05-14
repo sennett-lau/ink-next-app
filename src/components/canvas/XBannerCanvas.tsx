@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import SliderControl from './common/SliderControl'
+import TextLayer from './layers/TextLayer'
 
 type Props = {
   banner: string
@@ -13,6 +14,7 @@ const XBannerCanvas = (props: Props) => {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const blackLayerRef = useRef<HTMLDivElement>(null)
+  const textLayerCanvasRef = useRef<HTMLCanvasElement>(null)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
@@ -192,6 +194,7 @@ const XBannerCanvas = (props: Props) => {
               id={`ink-layer-${index}`}
             />
           ))}
+          <TextLayer textCanvasRef={textLayerCanvasRef} />
       </div>
       <SliderControl
         label='Black Layer Opacity'

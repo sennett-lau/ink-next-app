@@ -25,9 +25,6 @@ export const initializeFabric = ({
   width: number,
   height: number,
 }) => {
-  // get canvas element
-  const canvasElement = document.getElementById('canvas')
-
   // create fabric canvas
   const canvas = new fabric.Canvas(canvasRef.current, {
     width,
