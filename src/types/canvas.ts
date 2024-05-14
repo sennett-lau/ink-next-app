@@ -72,7 +72,6 @@ export type ModifyShape = {
   property: string
   value: any
   activeObjectRef: React.MutableRefObject<fabric.Object | null>
-  syncShapeInStorage: (shape: fabric.Object) => void
 }
 
 export type ElementDirection = {
@@ -145,7 +144,6 @@ export type CanvasMouseUp = {
 
 export type CanvasObjectModified = {
   options: fabric.IEvent
-  syncShapeInStorage: (shape: fabric.Object) => void
 }
 
 export type CanvasPathCreated = {

@@ -39,6 +39,12 @@ export const initializeFabric = ({
 
 // instantiate creation of custom fabric object/shape and add it to canvas
 export const handleCanvasMouseDown = ({ options, canvas, selectedShapeRef, isDrawing, shapeRef }: CanvasMouseDown) => {
+  console.log('options', options)
+  console.log('canvas', canvas)
+  console.log('selectedShapeRef', selectedShapeRef)
+  console.log('isDrawing', isDrawing)
+  console.log('shapeRef', shapeRef)
+  
   // get pointer coordinates
   const pointer = canvas.getPointer(options.e)
 
@@ -181,15 +187,9 @@ export const handleCanvasMouseUp = ({
 }
 
 // update shape in storage when object is modified
-export const handleCanvasObjectModified = ({ options, syncShapeInStorage }: CanvasObjectModified) => {
+export const handleCanvasObjectModified = ({ options }: CanvasObjectModified) => {
   const target = options.target
   if (!target) return
-
-  if (target?.type == 'activeSelection') {
-    // fix this
-  } else {
-    syncShapeInStorage(target)
-  }
 }
 
 // update shape in storage when path is created when in freeform mode

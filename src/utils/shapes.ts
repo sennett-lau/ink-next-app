@@ -15,6 +15,20 @@ export const createText = (pointer: PointerEvent, text: string) => {
   } as fabric.ITextOptions)
 }
 
+export const createTextDetailed = (
+  pointer: PointerEvent, text: string, color: string, fontFamily: string, fontWeight: string
+) => {
+  return new fabric.IText(text, {
+    left: pointer.x,
+    top: pointer.y,
+    fill: color,
+    fontFamily,
+    fontSize: 36,
+    fontWeight,
+    objectId: uuidv4(),
+  } as fabric.ITextOptions)
+}
+
 export const createRectangle = (pointer: PointerEvent) => {
   const rect = new fabric.Rect({
     left: pointer.x,
@@ -73,7 +87,7 @@ export const createShape = (canvas: fabric.Canvas, pointer: PointerEvent, shapeT
   return createSpecificShape(shapeType, pointer)
 }
 
-export const modifyShape = ({ canvas, property, value, activeObjectRef, syncShapeInStorage }: ModifyShape) => {
+export const modifyShape = ({ canvas, property, value, activeObjectRef }: ModifyShape) => {
   const selectedElement = canvas.getActiveObject()
 
   if (!selectedElement || selectedElement?.type === 'activeSelection') return
@@ -92,8 +106,6 @@ export const modifyShape = ({ canvas, property, value, activeObjectRef, syncShap
 
   // set selectedElement to activeObjectRef
   activeObjectRef.current = selectedElement
-
-  syncShapeInStorage(selectedElement)
 }
 
 export const bringElement = ({ canvas, direction, syncShapeInStorage }: ElementDirection) => {

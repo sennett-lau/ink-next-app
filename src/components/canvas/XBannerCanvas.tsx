@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import CanvasTextLayerControl from './common/CanvasTextLayerControl'
 import SliderControl from './common/SliderControl'
 import TextLayer from './layers/TextLayer'
 
@@ -24,6 +25,11 @@ const XBannerCanvas = (props: Props) => {
 
   const [inkIdToPosition, setInkIdToPosition] = useState<{ [key: string]: number }>({})
   const [inkIdToIsFacingLeft, setInkIdToIsFacingLeft] = useState<{ [key: string]: boolean }>({})
+
+  const [isShowText, setIsShowText] = useState<boolean>(false)
+  const [textColor, setTextColor] = useState<string>('#FD8603')
+  const [fontFamily, setFontFamily] = useState<string>('Arial')
+  const [fontWeight, setFontWeight] = useState<string>('700')
 
   useEffect(() => {
     const handleResize = () => {
@@ -170,6 +176,10 @@ const XBannerCanvas = (props: Props) => {
     }
   }
 
+  const onTextToggle = () => {
+    setIsShowText(!isShowText)
+  }
+
   return (
     <div className={`w-full max-w-[800px]`}>
       <div
@@ -194,7 +204,7 @@ const XBannerCanvas = (props: Props) => {
               id={`ink-layer-${index}`}
             />
           ))}
-          <TextLayer textCanvasRef={textLayerCanvasRef} />
+        <TextLayer textCanvasRef={textLayerCanvasRef} isShowText={isShowText} textColor={textColor} fontFamily={fontFamily} fontWeight={fontWeight} />
       </div>
       <SliderControl
         label='Black Layer Opacity'
@@ -216,6 +226,7 @@ const XBannerCanvas = (props: Props) => {
             onToggle={(isFacingLeft) => onToggleFacing(isFacingLeft, index)}
           />
         ))}
+      <CanvasTextLayerControl color={textColor} setTextColor={setTextColor} fontFamily={fontFamily} setFontFamily={setFontFamily} fontWeight={fontWeight} setFontWeight={setFontWeight} onTextToggle={onTextToggle} />
     </div>
   )
 }
