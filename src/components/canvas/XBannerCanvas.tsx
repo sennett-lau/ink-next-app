@@ -28,7 +28,7 @@ const XBannerCanvas = (props: Props) => {
 
   const [isShowText, setIsShowText] = useState<boolean>(false)
   const [textColor, setTextColor] = useState<string>('#FD8603')
-  const [fontFamily, setFontFamily] = useState<string>('Arial')
+  const [fontFamily, setFontFamily] = useState<string>('Times New Roman')
   const [fontWeight, setFontWeight] = useState<string>('700')
 
   useEffect(() => {

@@ -54,7 +54,7 @@ const TextLayer = (props: Props) => {
     if (!fabricRef.current || !isShowText) return
 
     const text = createTextDetailed(
-      { x: fabricRef.current.width / 2 - 100, y: fabricRef.current.height / 2 } as any as PointerEvent,
+      { x: fabricRef.current.width / 2 - 125, y: fabricRef.current.height / 2 -25 } as any as PointerEvent,
       'Tap to Type',
       textColor,
       fontFamily,

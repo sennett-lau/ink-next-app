@@ -23,7 +23,7 @@ export const createTextDetailed = (
     top: pointer.y,
     fill: color,
     fontFamily,
-    fontSize: 36,
+    fontSize: 48,
     fontWeight,
     objectId: uuidv4(),
   } as fabric.ITextOptions)
