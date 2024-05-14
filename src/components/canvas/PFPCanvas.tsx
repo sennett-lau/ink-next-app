@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { chimeraIds, femaleIds, maleIds } from '../../config/inks'
-import SliderControl from './SliderControl'
+import SliderControl from './common/SliderControl'
 
 type Props = {
   background: string

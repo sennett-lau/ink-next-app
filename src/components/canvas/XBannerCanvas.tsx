@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import SliderControl from './SliderControl'
+import SliderControl from './common/SliderControl'
 
 type Props = {
   banner: string
