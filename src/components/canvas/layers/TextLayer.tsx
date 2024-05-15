@@ -159,6 +159,21 @@ const TextLayer = (props: Props) => {
     fabricRef.current?.requestRenderAll()
   }, [fontFamily])
 
+  useEffect(() => {
+    if (!isEditingRef.current) isEditingRef.current = true
+
+    setElementAttributes((prev) => ({ ...prev, ['fontWeight']: fontWeight }))
+
+    modifyShape({
+      canvas: fabricRef.current as fabric.Canvas,
+      property: 'fontWeight',
+      value: fontWeight,
+      activeObjectRef,
+    })
+
+    fabricRef.current?.requestRenderAll()
+  }, [fontWeight])
+
   return (
     <div ref={containerRef} className='w-full h-full top-0 left-0 absolute z-20'>
       <canvas ref={textCanvasRef} />

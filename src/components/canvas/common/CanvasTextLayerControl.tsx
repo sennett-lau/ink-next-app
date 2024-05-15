@@ -1,4 +1,4 @@
-import { fontFamilies } from '@/config/general'
+import { fontFamilies, fontWeights } from '@/config/general'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { SketchPicker } from 'react-color'
@@ -19,6 +19,7 @@ const CanvasTextLayerControl = (props: Props) => {
 
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
   const [showFontPicker, setShowFontPicker] = useState<boolean>(false)
+  const [showFontWeightPicker, setShowFontWeightPicker] = useState<boolean>(false)
 
   const handleAddTextClick = () => {
     setIsShowingText(true)
@@ -102,12 +103,35 @@ const CanvasTextLayerControl = (props: Props) => {
               </div>
             </div>
           </div>
-          <input
-            type='text'
-            className='flex-1 bg-white text-black rounded-lg p-2 shadow-2xl focus:outline-none'
-            value={fontWeight}
-            onChange={(e) => setFontWeight(e.target.value)}
-          />
+          <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
+            <p className='m-0 text-black'>Font:</p>
+            <div className='flex gap-2 relative w-full cursor-pointer' onClick={() => setShowFontWeightPicker(!showFontWeightPicker)}>
+              <p className='m-0 text-black text-sm w-full'>{fontWeight}</p>
+              <Image
+                src='/icons/chevron.svg'
+                alt='Arrow Down'
+                width={12}
+                height={12}
+                onClick={() => setShowFontWeightPicker(!showFontWeightPicker)}
+              />
+              <div
+                className={`absolute top-0 left-0 w-[150px] h-fit overflow-hidden flex flex-col bg-white rounded-lg shadow-2xl translate-y-[40px] z-20 ${showFontWeightPicker ? '' : 'hidden'}`}
+              >
+                {fontWeights.map((w, index) => (
+                  <p
+                    key={index}
+                    className='m-0 text-black cursor-pointer hover:text-primary-500 hover:bg-gray-100 duration-200 ease-in-out text-sm px-2 py-1'
+                    onClick={() => {
+                      setFontWeight(w)
+                      setShowFontWeightPicker(false)
+                    }}
+                  >
+                    {w}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
