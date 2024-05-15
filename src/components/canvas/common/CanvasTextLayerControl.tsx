@@ -1,3 +1,5 @@
+import { fontFamilies } from '@/config/general'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { SketchPicker } from 'react-color'
 
@@ -16,6 +18,7 @@ const CanvasTextLayerControl = (props: Props) => {
   const [isShowingText, setIsShowingText] = useState<boolean>(false)
 
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
+  const [showFontPicker, setShowFontPicker] = useState<boolean>(false)
 
   const handleAddTextClick = () => {
     setIsShowingText(true)
@@ -45,15 +48,15 @@ const CanvasTextLayerControl = (props: Props) => {
         </button>
       )}
       {isShowingText && (
-        <div className='flex width-full gap-2'>
+        <div className='flex w-full gap-2'>
           <button className='italic py-2 px-4 rounded-lg bg-black text-primary-500 shadow-2xl hover:bg-gray-800'>
             Remove
           </button>
-          <div className='flex items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
+          <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
             <p className='m-0 text-black'>Color:</p>
             <div
               id='color-showcase'
-              className={`w-[80px] h-full bg-[${color}] relative`}
+              className={`w-full h-full bg-[${color}] relative`}
               onClick={() => setShowColorPicker(!showColorPicker)}
             >
               <div
@@ -70,12 +73,35 @@ const CanvasTextLayerControl = (props: Props) => {
               </div>
             </div>
           </div>
-          <input
-            type='text'
-            className='flex-1 bg-white text-black rounded-lg p-2 shadow-2xl focus:outline-none'
-            value={fontFamily}
-            onChange={(e) => setFontFamily(e.target.value)}
-          />
+          <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
+            <p className='m-0 text-black'>Font:</p>
+            <div className='flex gap-2 relative w-full cursor-pointer' onClick={() => setShowFontPicker(!showFontPicker)}>
+              <p className='m-0 text-black text-sm w-full'>{fontFamily}</p>
+              <Image
+                src='/icons/chevron.svg'
+                alt='Arrow Down'
+                width={12}
+                height={12}
+                onClick={() => setShowFontPicker(!showFontPicker)}
+              />
+              <div
+                className={`absolute top-0 left-0 w-[150px] h-fit overflow-hidden flex flex-col bg-white rounded-lg shadow-2xl translate-y-[40px] z-20 ${showFontPicker ? '' : 'hidden'}`}
+              >
+                {fontFamilies.map((font, index) => (
+                  <p
+                    key={index}
+                    className='m-0 text-black cursor-pointer hover:text-primary-500 hover:bg-gray-100 duration-200 ease-in-out text-sm px-2 py-1'
+                    onClick={() => {
+                      setFontFamily(font)
+                      setShowFontPicker(false)
+                    }}
+                  >
+                    {font}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
           <input
             type='text'
             className='flex-1 bg-white text-black rounded-lg p-2 shadow-2xl focus:outline-none'
