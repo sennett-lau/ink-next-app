@@ -39,12 +39,6 @@ export const initializeFabric = ({
 
 // instantiate creation of custom fabric object/shape and add it to canvas
 export const handleCanvasMouseDown = ({ options, canvas, selectedShapeRef, isDrawing, shapeRef }: CanvasMouseDown) => {
-  console.log('options', options)
-  console.log('canvas', canvas)
-  console.log('selectedShapeRef', selectedShapeRef)
-  console.log('isDrawing', isDrawing)
-  console.log('shapeRef', shapeRef)
-  
   // get pointer coordinates
   const pointer = canvas.getPointer(options.e)
 

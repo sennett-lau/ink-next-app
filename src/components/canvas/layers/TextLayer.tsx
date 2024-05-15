@@ -9,8 +9,9 @@ import {
   handleCanvaseMouseMove,
   handleResize,
   initializeFabric,
+  renderCanvas,
 } from '@/utils/canvas'
-import { createText, createTextDetailed } from '@/utils/shapes'
+import { createText, createTextDetailed, modifyShape } from '@/utils/shapes'
 import { create } from 'domain'
 
 import React, { use, useEffect, useRef, useState } from 'react'
@@ -54,7 +55,7 @@ const TextLayer = (props: Props) => {
     if (!fabricRef.current || !isShowText) return
 
     const text = createTextDetailed(
-      { x: fabricRef.current.width / 2 - 125, y: fabricRef.current.height / 2 -25 } as any as PointerEvent,
+      { x: fabricRef.current.width / 2 - 125, y: fabricRef.current.height / 2 - 25 } as any as PointerEvent,
       'Tap to Type',
       textColor,
       fontFamily,
@@ -81,7 +82,6 @@ const TextLayer = (props: Props) => {
     })
 
     canvas.on('mouse:down', (options) => {
-      console.log('mouse:down', options)
       handleCanvasMouseDown({
         options,
         canvas,
@@ -112,36 +112,9 @@ const TextLayer = (props: Props) => {
       })
     })
 
-    canvas.on('object:modified', (options) => {
-      return handleCanvasObjectModified({
-        options,
-      })
-    })
-
     canvas?.on('object:moving', (options) => {
       handleCanvasObjectMoving({
         options,
-      })
-    })
-
-    canvas.on('selection:created', (options) => {
-      handleCanvasSelectionCreated({
-        options,
-        isEditingRef,
-        setElementAttributes,
-      })
-    })
-
-    canvas.on('object:scaling', (options) => {
-      handleCanvasObjectScaling({
-        options,
-        setElementAttributes,
-      })
-    })
-
-    window.addEventListener('resize', () => {
-      handleResize({
-        canvas: fabricRef.current,
       })
     })
 
@@ -155,6 +128,21 @@ const TextLayer = (props: Props) => {
       })
     }
   }, [textCanvasRef])
+
+  useEffect(() => {
+    if (!isEditingRef.current) isEditingRef.current = true
+
+    setElementAttributes((prev) => ({ ...prev, ['fill']: textColor }))
+
+    modifyShape({
+      canvas: fabricRef.current as fabric.Canvas,
+      property: 'fill',
+      value: textColor,
+      activeObjectRef,
+    })
+
+    fabricRef.current?.requestRenderAll()
+  }, [textColor])
 
   return (
     <div ref={containerRef} className='w-full h-full top-0 left-0 absolute z-20'>

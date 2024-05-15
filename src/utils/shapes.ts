@@ -88,7 +88,11 @@ export const createShape = (canvas: fabric.Canvas, pointer: PointerEvent, shapeT
 }
 
 export const modifyShape = ({ canvas, property, value, activeObjectRef }: ModifyShape) => {
-  const selectedElement = canvas.getActiveObject()
+  const objs = canvas.getObjects()
+
+  if (!objs.length) return
+
+  const selectedElement = objs[0]
 
   if (!selectedElement || selectedElement?.type === 'activeSelection') return
 
