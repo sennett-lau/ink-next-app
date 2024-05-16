@@ -19,10 +19,9 @@ const CanvasControl = (props: Props) => {
   const outputCanvasRef = useRef<HTMLCanvasElement>(null)
 
   const downloadImage = () => {
-    if (!canvasRef.current || !textCanvasRef.current || !outputCanvasRef.current) return
+    if (!canvasRef.current || !outputCanvasRef.current) return
 
     const base = canvasRef.current
-    const text = textCanvasRef.current
     const output = outputCanvasRef.current
 
     const ctx = output.getContext('2d')
@@ -32,6 +31,8 @@ const CanvasControl = (props: Props) => {
     if (inkhronizerIndex === 0) {
       output.width = 1500
       output.height = 500
+
+      const text = textCanvasRef.current
 
       ctx.drawImage(base, 0, 0, 1500, 500)
       ctx.drawImage(text, 0, 0, 1500, 500)
