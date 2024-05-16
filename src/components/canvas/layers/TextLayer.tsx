@@ -52,17 +52,21 @@ const TextLayer = (props: Props) => {
   })
 
   useEffect(() => {
-    if (!fabricRef.current || !isShowText) return
+    if (!fabricRef.current) return
 
-    const text = createTextDetailed(
-      { x: fabricRef.current.width / 2 - 125, y: fabricRef.current.height / 2 - 25 } as any as PointerEvent,
-      'Tap to Type',
-      textColor,
-      fontFamily,
-      fontWeight,
-    )
+    if (isShowText) {
+      const text = createTextDetailed(
+        { x: fabricRef.current.width / 2 - 125, y: fabricRef.current.height / 2 - 25 } as any as PointerEvent,
+        'Tap to Type',
+        textColor,
+        fontFamily,
+        fontWeight,
+      )
 
-    fabricRef.current.add(text)
+      fabricRef.current.add(text)
+    } else if (fabricRef.current.getObjects().length > 0) {
+      fabricRef.current.clear()
+    }
   }, [isShowText])
 
   const handleActiveElement = (el: ActiveElement) => {

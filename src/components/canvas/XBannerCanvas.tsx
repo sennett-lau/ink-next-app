@@ -176,10 +176,6 @@ const XBannerCanvas = (props: Props) => {
     }
   }
 
-  const onTextToggle = () => {
-    setIsShowText(!isShowText)
-  }
-
   return (
     <div className={`w-full max-w-[800px]`}>
       <div
@@ -204,7 +200,13 @@ const XBannerCanvas = (props: Props) => {
               id={`ink-layer-${index}`}
             />
           ))}
-        <TextLayer textCanvasRef={textLayerCanvasRef} isShowText={isShowText} textColor={textColor} fontFamily={fontFamily} fontWeight={fontWeight} />
+        <TextLayer
+          textCanvasRef={textLayerCanvasRef}
+          isShowText={isShowText}
+          textColor={textColor}
+          fontFamily={fontFamily}
+          fontWeight={fontWeight}
+        />
       </div>
       <SliderControl
         label='Black Layer Opacity'
@@ -226,7 +228,16 @@ const XBannerCanvas = (props: Props) => {
             onToggle={(isFacingLeft) => onToggleFacing(isFacingLeft, index)}
           />
         ))}
-      <CanvasTextLayerControl color={textColor} setTextColor={setTextColor} fontFamily={fontFamily} setFontFamily={setFontFamily} fontWeight={fontWeight} setFontWeight={setFontWeight} onTextToggle={onTextToggle} />
+      <CanvasTextLayerControl
+        color={textColor}
+        setTextColor={setTextColor}
+        fontFamily={fontFamily}
+        setFontFamily={setFontFamily}
+        fontWeight={fontWeight}
+        setFontWeight={setFontWeight}
+        isShowText={isShowText}
+        setIsShowText={setIsShowText}
+      />
     </div>
   )
 }

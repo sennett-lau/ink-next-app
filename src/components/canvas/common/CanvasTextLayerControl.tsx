@@ -10,21 +10,16 @@ type Props = {
   setFontFamily: (fontFamily: string) => void
   fontWeight: string
   setFontWeight: (fontWeight: string) => void
-  onTextToggle: () => void
+  isShowText: boolean
+  setIsShowText: (isShowText: boolean) => void
 }
 
 const CanvasTextLayerControl = (props: Props) => {
-  const { color, fontFamily, fontWeight, setTextColor, setFontFamily, setFontWeight, onTextToggle } = props
-  const [isShowingText, setIsShowingText] = useState<boolean>(false)
+  const { color, fontFamily, fontWeight, setTextColor, setFontFamily, setFontWeight, isShowText, setIsShowText } = props
 
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
   const [showFontPicker, setShowFontPicker] = useState<boolean>(false)
   const [showFontWeightPicker, setShowFontWeightPicker] = useState<boolean>(false)
-
-  const handleAddTextClick = () => {
-    setIsShowingText(true)
-    onTextToggle()
-  }
 
   useEffect(() => {
     const colorShowcase = document.getElementById('color-showcase')
@@ -32,7 +27,7 @@ const CanvasTextLayerControl = (props: Props) => {
     if (colorShowcase) {
       colorShowcase.style.backgroundColor = color
     }
-  }, [color, isShowingText])
+  }, [color, isShowText])
 
   const handleChangeComplete = (color: { hex: string }) => {
     setTextColor(color.hex)
@@ -40,17 +35,20 @@ const CanvasTextLayerControl = (props: Props) => {
 
   return (
     <div className='flex w-full justify-between mt-2'>
-      {!isShowingText && (
+      {!isShowText && (
         <button
           className='italic py-2 px-4 rounded-lg bg-black text-primary-500 shadow-2xl hover:bg-gray-800 w-full'
-          onClick={handleAddTextClick}
+          onClick={() => setIsShowText(true)}
         >
           Add Text
         </button>
       )}
-      {isShowingText && (
+      {isShowText && (
         <div className='flex w-full gap-2'>
-          <button className='italic py-2 px-4 rounded-lg bg-black text-primary-500 shadow-2xl hover:bg-gray-800'>
+          <button
+            className='italic py-2 px-4 rounded-lg bg-black text-primary-500 shadow-2xl hover:bg-gray-800'
+            onClick={() => setIsShowText(false)}
+          >
             Remove
           </button>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
@@ -76,7 +74,10 @@ const CanvasTextLayerControl = (props: Props) => {
           </div>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
             <p className='m-0 text-black'>Font:</p>
-            <div className='flex gap-2 relative w-full cursor-pointer' onClick={() => setShowFontPicker(!showFontPicker)}>
+            <div
+              className='flex gap-2 relative w-full cursor-pointer'
+              onClick={() => setShowFontPicker(!showFontPicker)}
+            >
               <p className='m-0 text-black text-sm w-full'>{fontFamily}</p>
               <Image
                 src='/icons/chevron.svg'
@@ -105,7 +106,10 @@ const CanvasTextLayerControl = (props: Props) => {
           </div>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
             <p className='m-0 text-black'>Font:</p>
-            <div className='flex gap-2 relative w-full cursor-pointer' onClick={() => setShowFontWeightPicker(!showFontWeightPicker)}>
+            <div
+              className='flex gap-2 relative w-full cursor-pointer'
+              onClick={() => setShowFontWeightPicker(!showFontWeightPicker)}
+            >
               <p className='m-0 text-black text-sm w-full'>{fontWeight}</p>
               <Image
                 src='/icons/chevron.svg'
