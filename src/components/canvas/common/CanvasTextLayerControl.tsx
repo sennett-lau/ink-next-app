@@ -70,7 +70,7 @@ const CanvasTextLayerControl = (props: Props) => {
         </button>
       )}
       {isShowText && (
-        <div className='flex w-full gap-2'>
+        <div className='flex flex-col md:flex-row w-full gap-2'>
           <button
             className='italic py-2 px-4 rounded-lg bg-black text-primary-500 shadow-2xl hover:bg-gray-800'
             onClick={() => setIsShowText(false)}
@@ -78,7 +78,7 @@ const CanvasTextLayerControl = (props: Props) => {
             Remove
           </button>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
-            <p className='m-0 text-black'>Color:</p>
+            <p className='m-0 text-black w-16'>Color:</p>
             <div
               id='color-showcase'
               className={`w-full h-full bg-[${color}] relative`}
@@ -99,7 +99,7 @@ const CanvasTextLayerControl = (props: Props) => {
             </div>
           </div>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
-            <p className='m-0 text-black'>Font:</p>
+            <p className='m-0 text-black w-16'>Font:</p>
             <div
               className='flex gap-2 relative w-full cursor-pointer'
               onClick={() => setShowFontPicker(!showFontPicker)}
@@ -131,7 +131,7 @@ const CanvasTextLayerControl = (props: Props) => {
             </div>
           </div>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
-            <p className='m-0 text-black'>Weight:</p>
+            <p className='m-0 text-black w-16'>Weight:</p>
             <div
               className='flex gap-2 relative w-full cursor-pointer'
               onClick={() => handleSettingClick(FontSettings.Weight)}
