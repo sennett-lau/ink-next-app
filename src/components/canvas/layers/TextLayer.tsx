@@ -14,7 +14,7 @@ import {
 import { createText, createTextDetailed, modifyShape } from '@/utils/shapes'
 import { create } from 'domain'
 
-import React, { use, useEffect, useRef, useState } from 'react'
+import React, { use, useCallback, useEffect, useRef, useState } from 'react'
 
 type Props = {
   textCanvasRef: React.RefObject<HTMLCanvasElement>
@@ -178,8 +178,12 @@ const TextLayer = (props: Props) => {
     fabricRef.current?.requestRenderAll()
   }, [fontWeight])
 
+  const handlePointerLeave = useCallback(() => {
+    fabricRef.current?.discardActiveObject().requestRenderAll()
+  }, [])
+
   return (
-    <div ref={containerRef} className='w-full h-full top-0 left-0 absolute z-20'>
+    <div ref={containerRef} className='w-full h-full top-0 left-0 absolute z-20' onMouseLeave={handlePointerLeave}>
       <canvas ref={textCanvasRef} />
     </div>
   )
