@@ -8,14 +8,14 @@ type Props = {
   banner: string
   inks: string[]
   canvasRef: React.RefObject<HTMLCanvasElement>
+  textCanvasRef: React.RefObject<HTMLCanvasElement>
 }
 
 const XBannerCanvas = (props: Props) => {
-  const { banner, inks, canvasRef } = props
+  const { banner, inks, canvasRef, textCanvasRef } = props
 
   const containerRef = useRef<HTMLDivElement>(null)
   const blackLayerRef = useRef<HTMLDivElement>(null)
-  const textLayerCanvasRef = useRef<HTMLCanvasElement>(null)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
@@ -201,7 +201,7 @@ const XBannerCanvas = (props: Props) => {
             />
           ))}
         <TextLayer
-          textCanvasRef={textLayerCanvasRef}
+          textCanvasRef={textCanvasRef}
           isShowText={isShowText}
           textColor={textColor}
           fontFamily={fontFamily}
