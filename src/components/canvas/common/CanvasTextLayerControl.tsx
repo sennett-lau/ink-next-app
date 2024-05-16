@@ -105,7 +105,7 @@ const CanvasTextLayerControl = (props: Props) => {
             </div>
           </div>
           <div className='flex flex-1 items-center gap-2 bg-white rounded-lg p-2 shadow-2xl'>
-            <p className='m-0 text-black'>Font:</p>
+            <p className='m-0 text-black'>Weight:</p>
             <div
               className='flex gap-2 relative w-full cursor-pointer'
               onClick={() => setShowFontWeightPicker(!showFontWeightPicker)}
