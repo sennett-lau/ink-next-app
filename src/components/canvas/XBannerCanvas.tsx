@@ -1,15 +1,18 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import SliderControl from './SliderControl'
+import CanvasTextLayerControl from './common/CanvasTextLayerControl'
+import SliderControl from './common/SliderControl'
+import TextLayer from './layers/TextLayer'
 
 type Props = {
   banner: string
   inks: string[]
   canvasRef: React.RefObject<HTMLCanvasElement>
+  textCanvasRef: React.RefObject<HTMLCanvasElement>
 }
 
 const XBannerCanvas = (props: Props) => {
-  const { banner, inks, canvasRef } = props
+  const { banner, inks, canvasRef, textCanvasRef } = props
 
   const containerRef = useRef<HTMLDivElement>(null)
   const blackLayerRef = useRef<HTMLDivElement>(null)
@@ -22,6 +25,11 @@ const XBannerCanvas = (props: Props) => {
 
   const [inkIdToPosition, setInkIdToPosition] = useState<{ [key: string]: number }>({})
   const [inkIdToIsFacingLeft, setInkIdToIsFacingLeft] = useState<{ [key: string]: boolean }>({})
+
+  const [isShowText, setIsShowText] = useState<boolean>(false)
+  const [textColor, setTextColor] = useState<string>('#FD8603')
+  const [fontFamily, setFontFamily] = useState<string>('Times New Roman')
+  const [fontWeight, setFontWeight] = useState<string>('700')
 
   useEffect(() => {
     const handleResize = () => {
@@ -192,6 +200,13 @@ const XBannerCanvas = (props: Props) => {
               id={`ink-layer-${index}`}
             />
           ))}
+        <TextLayer
+          textCanvasRef={textCanvasRef}
+          isShowText={isShowText}
+          textColor={textColor}
+          fontFamily={fontFamily}
+          fontWeight={fontWeight}
+        />
       </div>
       <SliderControl
         label='Black Layer Opacity'
@@ -213,6 +228,16 @@ const XBannerCanvas = (props: Props) => {
             onToggle={(isFacingLeft) => onToggleFacing(isFacingLeft, index)}
           />
         ))}
+      <CanvasTextLayerControl
+        color={textColor}
+        setTextColor={setTextColor}
+        fontFamily={fontFamily}
+        setFontFamily={setFontFamily}
+        fontWeight={fontWeight}
+        setFontWeight={setFontWeight}
+        isShowText={isShowText}
+        setIsShowText={setIsShowText}
+      />
     </div>
   )
 }
