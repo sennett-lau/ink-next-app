@@ -1,5 +1,5 @@
 export const SITE_URL: string = 'https://ink.sennettlau.me'
-export const VERSION: string = '1.7.8'
+export const VERSION: string = '1.8.0'
 
 export const fontFamilies: string[] = [
   'Arial',
