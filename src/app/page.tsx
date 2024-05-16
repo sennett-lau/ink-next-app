@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import CanvasContainer from '../components/canvas/CanvasControl'
-import CanvasTab from '../components/canvas/CanvasTab'
+import CanvasTab from '../components/canvas/common/CanvasTab'
 import PFPCustomizer from '../components/customizer/PFPCustomizer'
 import XBannerCustomizer from '../components/customizer/XBannerCustomizer'
 
