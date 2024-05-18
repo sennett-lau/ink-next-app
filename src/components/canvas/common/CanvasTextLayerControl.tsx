@@ -156,6 +156,10 @@ const CanvasTextLayerControl = (props: Props) => {
                       setFontWeight(w)
                       setShowFontWeightPicker(false)
                     }}
+                    style={{
+                      fontWeight: w,
+                      fontFamily,
+                    }}
                   >
                     {w}
                   </p>
