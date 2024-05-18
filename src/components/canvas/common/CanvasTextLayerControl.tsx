@@ -123,6 +123,7 @@ const CanvasTextLayerControl = (props: Props) => {
                       setFontFamily(font)
                       setShowFontPicker(false)
                     }}
+                    style={{ fontFamily: font }}
                   >
                     {font}
                   </p>
@@ -154,6 +155,10 @@ const CanvasTextLayerControl = (props: Props) => {
                     onClick={() => {
                       setFontWeight(w)
                       setShowFontWeightPicker(false)
+                    }}
+                    style={{
+                      fontWeight: w,
+                      fontFamily,
                     }}
                   >
                     {w}
