@@ -123,6 +123,7 @@ const CanvasTextLayerControl = (props: Props) => {
                       setFontFamily(font)
                       setShowFontPicker(false)
                     }}
+                    style={{ fontFamily: font }}
                   >
                     {font}
                   </p>
